@@ -1,0 +1,169 @@
+:root {
+    --yellow: #f7eb3c;
+    --yellow2: #fff458;
+    --green: #1c8502;
+    --green2: rgb(50, 180, 17);
+    /* CSS HEX */
+    --cool-gray: #909CBAff;
+    --jonquil: #FECC05ff;
+    --dartmouth-green: #056835ff;
+    --black: #000000ff;
+    --licorice: #201A16ff;
+}
+
+.carousel-item {
+    height: 90vh;
+    min-height: 300px;
+}
+
+.carousel-caption {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%);
+    z-index: 2;
+    width: 80%;
+}
+
+.carousel-caption h5 {
+    font-size: 45px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--jonquil);
+    font-weight: bold;
+    /* margin-top: 25px; */
+}
+
+.carousel-caption p {
+    width: 60%;
+    margin: auto;
+    font-size: 22px;
+    line-height: 1.9;
+    font-weight: bold;
+}
+
+.carousel-inner::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+}
+
+.carousel-item img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.navbar-nav a {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.navbar-light .navbar-brand {
+    color: #000;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+a img {
+    height: 50px;
+}
+
+.bg-yellow ,.btn-yellow {
+    background: var(--jonquil);
+    color: white;
+}
+
+.bg-green, .btn-green {
+    background-color: var(--dartmouth-green);
+    color: white;
+}
+
+
+
+.btn-yellow:hover {
+    background: var(--jonquil2);
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: var(--dartmouth-green2);
+    color: white;
+}
+
+.scrollspy-example
+ {
+    height: 450px;
+    overflow:scroll;
+    color:black;
+
+ }
+ .scrollspy-example .container-fluid {
+    border-bottom: 1px solid var(--cool-gray);
+    padding: 30px;
+ }
+
+ .login-form {
+    max-width: 750px;
+ }
+ .navbar .mobile-nav {
+    padding: 0 50px;
+}
+
+.dpa-text-h3 {
+    color: black;
+    font-weight: bold;
+}
+.data-policy-box {
+    color: black;
+}
+.container-dpa {
+    /* border: 1px solid var(--cool-gray); */
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.login-page {
+    height: 90vh;
+    /* border-top:10px solid black;
+    border-bottom:10px solid black; */
+
+}
+.border-nav{
+    border-bottom: 10px solid black;
+}
+
+
+.card img {
+    height: 400px;
+}
+
+.news-image {
+    height: 150px;
+    width:150px;
+}
+
+@media (max-width: 768px) {
+   .navbar .mobile-nav {
+       padding: 0;
+       align-items: start;
+   }
+   .login-page {
+       height: 100%;
+   }
+   .login-page .bg-yellow {
+    padding: 20px;
+   }
+}
