@@ -1,6 +1,14 @@
 @include('public.Home.header')
-
-<form class="container-fluid w-75 p-5">
+<head>
+    <link rel="stylesheet" href="{{asset('assets/dist/css/adminlte.min.css')}}">
+</head>
+<form class="container-fluid w-75 p-5" action="{{ route('register-form-submit') }}" method="post">
+    @csrf
+    @if(Session::has('success_message'))
+        <div class="alert alert-success">
+        {{ Session::get('success_message') }}
+        </div>
+        @endif
     <div class="row container-fluid d-flex align-items-center justify-content-center">
         <h5 class="text-bold">PERSONAL INFORMATION</h5>
         <div class="col-md-4 form-group">
@@ -16,28 +24,28 @@
             <input type="text" class="form-control" name="middlename" placeholder="Enter Middle Name" required>
         </div>
         <div class="col-md-4 form-group">
-            <label for="">Student Number(Optioal)</label>
-            <input type="text" class="form-control" name="student_number" placeholder="Enter ..." required>
+            <label for="">Student Number(Optional)</label>
+            <input type="text" class="form-control" name="student_number" placeholder="Enter Student Number" required>
         </div>
         <div class="col-md-4 form-group">
             <label for="">Email</label>
-            <input type="text" class="form-control" name="email" placeholder="Enter ..." required>
+            <input type="text" class="form-control" name="email" placeholder="Enter Email Address" required>
         </div>
         <div class="col-md-4 form-group">
             <label for="">Password</label>
-            <input type="text" class="form-control" name="password" placeholder="Enter ..." required>
+            <input type="text" class="form-control" name="password" placeholder="Enter Password" required>
         </div>
         <div class="col-md-4 form-group">
             <label for="">Phone Number</label>
-            <input type="text" class="form-control" name="phone_number" placeholder="Enter ..." required>
+            <input type="text" class="form-control" name="phone_number" placeholder="Enter Phone Number" required>
         </div>
         <div class="col-md-4 form-group">
             <label for="">Home Address</label>
-            <input type="text" class="form-control" name="home_address" placeholder="Enter ..." required>
+            <input type="text" class="form-control" name="home_address" placeholder="Enter Home Address" required>
         </div>
         <div class="col-md-4 form-group">
             <label for="">Birth Date</label>
-            <input type="date" class="form-control" name="birthdate" placeholder="Enter ..." required>
+            <input type="date" class="form-control" name="birthdate" placeholder="Enter Birth Date" required>
         </div>
     </div>
     <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">

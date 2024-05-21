@@ -25,7 +25,7 @@ class LoginController extends Controller
             if(auth()->user()->usertype == 1){
                 return redirect('/admin/dashboard');
             }else {
-                return redirect('/admin/gallery');
+                return redirect('/admin/dashboard');
             }
         } else {
             return redirect()->back()->withErrors(['error-message' => 'Invalid username or password']);

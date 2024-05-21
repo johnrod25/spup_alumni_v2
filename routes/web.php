@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserDetailsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::post('/Change-password', [LoginController::class, 'changePassword'])->nam
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/register', 'public.Home.register')->name('register');
 Route::get('/register-form',[HomeController::class, 'register_form'])->name('register-form');
+Route::post('/register-form-submit',[HomeController::class, 'register_form_submit'])->name('register-form-submit');
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/announcement/{id}', [AnnouncementController::class, 'show_announcement'])->name('show-announcement');
@@ -37,6 +39,13 @@ Route::get('/news/{id}', [NewsController::class, 'show_news'])->name('show-news'
 Route::get('/announcement', [AnnouncementController::class, 'show_all_announcement'])->name('all-announcements');
 Route::get('/news', [NewsController::class, 'show_all_news'])->name('all-news');
 Route::view('/admin/dashboard', 'public.Admin.index')->name('admin-dashboard');
+
+//ANNOUNCEMENTS
+Route::get('/admin/alumni', [UserDetailsController::class, 'index'])->name('admin-alumni');
+Route::post('/admin/add-alumni', [UserDetailsController::class, 'add_alumni'])->name('add-alumni');
+Route::post('/admin/edit-alumni', [UserDetailsController::class, 'edit_alumni'])->name('edit-alumni');
+Route::post('/admin/update-alumni', [UserDetailsController::class, 'update_alumni'])->name('update-alumni');
+Route::post('/admin/delete-alumni/{id}', [UserDetailsController::class, 'destroy_alumni'])->name('delete-alumni');
 
 //ANNOUNCEMENTS
 Route::get('/admin/announcement', [AnnouncementController::class, 'index'])->name('admin-announcement');

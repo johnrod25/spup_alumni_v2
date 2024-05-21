@@ -100,24 +100,30 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('admin-alumni')}}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Alumnis</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('admin-announcement')}}" class="nav-link">
-                        <i class="nav-icon fas fa-building"></i>
+                        <i class="nav-icon fas fa-bullhorn"></i>
                         <p>Announcements</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('admin-news')}}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-newspaper"></i>
                         <p>News & Articles</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('admin-gallery')}}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-images"></i>
                         <p>Gallery</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{route('admin-gallery')}}" class="nav-link">
                         <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>sdfafsd<i class="right fas fa-angle-left"></i>
@@ -143,7 +149,7 @@
                         <i class="nav-icon fas fa-print"></i>
                         <p>Report</p>
                     </a>
-                </li>
+                </li> --}}
 
             </ul>
         </nav>
