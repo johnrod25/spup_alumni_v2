@@ -92,17 +92,17 @@
             <h6>Remember that SPUP handles your data responsibly and in accordance with privacy laws. If you have any specific concerns or preferences, feel free to communicate them with the University. Your privacy matters!</h6>
         </div>
         <div class="border p-3">
-            <p class="mx-2"><span><input type="checkbox" style="margin-right: 5px" required></span>I have read,
+            <p class="mx-2"><span><input type="checkbox" id="checkbox1" style="margin-right: 5px" required></span>I have read,
                 understood, and agree to the Privacy Information for Alumni.</p>
-            <p class="mx-2"><span><input type="checkbox" style="margin-right: 5px" required></span>I agree to use of
+            <p class="mx-2"><span><input type="checkbox" id="checkbox2" style="margin-right: 5px" required></span>I agree to use of
                 my personal information for marketing purposes of University services.</p>
-            <p class="mx-2"><span><input type="checkbox" style="margin-right: 5px" required></span>I agree to share my
+            <p class="mx-2"><span><input type="checkbox" id="checkbox3" style="margin-right: 5px" required></span>I agree to share my
                 depersonalized information to academic researchers who may request for such, instituting measures that
                 will not allow me to be individually identified.</p>
 
             <div class="d-flex justify-content-end gap-2">
                 <button class="btn btn-outline-secondary"><i class="fa-solid fa-xmark"></i> Cancel</button>
-                <button class="btn btn-success">Next <i class="fa-solid fa-angle-right"></i></button>
+                <button class="btn btn-success"onclick="registerForm()">Next <i class="fa-solid fa-angle-right"></i></button>
             </div>
         </div>
     </div>
@@ -110,3 +110,17 @@
 </div>
 {{-- @include('public.Home.contact') --}}
 @include('public.Home.footer')
+
+<script>
+    function registerForm(){
+        let checkbox1 = document.getElementById('checkbox1').checked;
+        let checkbox2 = document.getElementById('checkbox2').checked;
+        let checkbox3 = document.getElementById('checkbox3').checked;
+        // alert(checkbox1)
+        if(checkbox1 == true && checkbox2 == true && checkbox3 == true){
+            window.location.href = "{{ route('register-form')}}";
+        }else{
+            errorToast('Check all check boxes.');
+        }
+    }
+</script>

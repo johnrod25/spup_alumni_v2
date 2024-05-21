@@ -4,20 +4,26 @@
     <div class="row h-100">
         <div class="col-md-6 p-3 d-flex align-items-center">
             <div class="container p-5 login-form">
-                <h1>Welcome Back!</h1>
-                <p class="mt-3">To keep connected with us, please login using your personal information.</p>
-                <div class="form-group mt-5">
-                    <label for="username">Email Address</label>
-                    <input type="text" class="form-control mb-3">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="text" class="form-control mb-4">
-                </div>
-                <div class="d-flex justify-content-between align-items-center border-1 border-top pt-3">
-                    <button class="btn btn-yellow text-uppercase px-5">Sign In</button>
-                    <a href="#" class="">Forgot Password</a>
-                </div>
+                <form class="yourform" action="{{ route('login') }}" method="post">
+                    @csrf
+                    <h1>Welcome Back!</h1>
+                    <p class="mt-3">To keep connected with us, please login using your personal information.</p>
+                    <div class="form-group mt-5">
+                        <label for="username">Email Address</label>
+                        <input type="text" name="username" id="username" class="form-control mb-3" value="{{ old('username') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" name="password" class="form-control mb-4">
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center border-1 border-top pt-3">
+                        <button class="btn btn-yellow text-uppercase px-5">Sign In</button>
+                        <a href="#" class="">Forgot Password</a>
+                    </div>
+                </form>
+                @error('error-message')
+                    <div class='alert alert-danger mt-3'>{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div
