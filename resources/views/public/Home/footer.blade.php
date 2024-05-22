@@ -71,8 +71,6 @@
   <script src="{{ asset('vendor/php-email-form/validate.js') }}"></script>
   <script src="{{ asset('js/main.js') }}"></script>
 
-  !-- ./wrapper -->
-
   <!-- REQUIRED SCRIPTS -->
   <!-- jQuery -->
   <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>

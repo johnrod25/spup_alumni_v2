@@ -29,11 +29,11 @@
         </div>
         <div class="col-md-4 form-group">
             <label for="">Email</label>
-            <input type="text" class="form-control" name="email" placeholder="Enter Email Address" required>
+            <input type="email" class="form-control" name="email" placeholder="Enter Email Address" required>
         </div>
         <div class="col-md-4 form-group">
             <label for="">Password</label>
-            <input type="text" class="form-control" name="password" placeholder="Enter Password" required>
+            <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
         </div>
         <div class="col-md-4 form-group">
             <label for="">Phone Number</label>

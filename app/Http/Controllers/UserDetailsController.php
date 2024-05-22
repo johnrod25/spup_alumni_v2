@@ -11,7 +11,7 @@ class UserDetailsController extends Controller
     public function index()
     {
         return view('public.Admin.alumni', [
-            'datas' => User::orderBy('id', 'DESC')->get()
+            'datas' => User::where('usertype','2')->orderBy('id', 'DESC')->get()
         ]);
     }
 }

@@ -38,9 +38,9 @@ Route::get('/news/{id}', [NewsController::class, 'show_news'])->name('show-news'
 // Route::view('/login', 'public.Home.login')->name('login');
 Route::get('/announcement', [AnnouncementController::class, 'show_all_announcement'])->name('all-announcements');
 Route::get('/news', [NewsController::class, 'show_all_news'])->name('all-news');
-Route::view('/admin/dashboard', 'public.Admin.index')->name('admin-dashboard');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard');
 
-//ANNOUNCEMENTS
+//ALUMNI
 Route::get('/admin/alumni', [UserDetailsController::class, 'index'])->name('admin-alumni');
 Route::post('/admin/add-alumni', [UserDetailsController::class, 'add_alumni'])->name('add-alumni');
 Route::post('/admin/edit-alumni', [UserDetailsController::class, 'edit_alumni'])->name('edit-alumni');

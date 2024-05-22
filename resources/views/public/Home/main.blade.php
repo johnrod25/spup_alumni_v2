@@ -13,24 +13,23 @@
                     <img src="{{ asset('img/details-1.png') }}" class="img-fluid" alt="">
                 </div>
                 <div class="col-md-8 pt-4" data-aos="fade-up">
-                    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-                    <p class="fst-italic">
+                    <h3 class="mb-3">Welcome to the St. Paul University Philippines Alumni Association!</h3>
+                    {{-- <p class="fst-italic">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore
                         magna aliqua.
-                    </p>
-                    <ul>
+                    </p> --}}
+                    {{-- <ul>
                         <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
                         <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
                         <li><i class="bi bi-check"></i> Iure at voluptas aspernatur dignissimos doloribus repudiandae.
                         </li>
                         <li><i class="bi bi-check"></i> Est ipsa assumenda id facilis nesciunt placeat sed doloribus
                             praesentium.</li>
-                    </ul>
-                    <p>
-                        Voluptas nisi in quia excepturi nihil voluptas nam et ut. Expedita omnis eum consequatur non.
-                        Sed in asperiores aut repellendus. Error quisquam ab maiores. Quibusdam sit in officia
-                    </p>
+                    </ul> --}}
+                    <h5>
+                        The St. Paul University Philippines Alumni Association (SPUPAA) is a vibrant and dynamic community of graduates who share a common bond through their education at St. Paul University Philippines (SPUP). Established to foster a lifelong connection between the university and its alumni, the SPUPAA serves as a cornerstone for networking, professional development, and social engagement among Paulinians worldwide.
+                    </h5>
                 </div>
             </div>
 
