@@ -42,6 +42,7 @@ class HomeController extends Controller
             'birthdate' => $request->birthdate,
             'degree' => $request->degree,
             'batch' => $request->batch,
+            'involve_purpose' => $request->involve_purpose,
             'year_graduated' => $request->year_graduated,
             'company_name' => $request->company_name,
             'specialization' => $request->specialization,
@@ -54,7 +55,7 @@ class HomeController extends Controller
             'user_id' => User_Details::latest()->first()->id,
             'name' => $request->firstname.' '.$request->middlename.' '.$request->lastname,
             'username' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => bcrypt($request->lastname.$request->student_number),
             'usertype' => 2,
         ]);
         $data->save();

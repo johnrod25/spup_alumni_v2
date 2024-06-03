@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('home_address');
             $table->date('birthdate');
             $table->string('degree');
+            $table->string('involve_purpose');
             $table->string('batch');
             $table->date('year_graduated');
             $table->string('company_name');

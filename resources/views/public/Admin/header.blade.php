@@ -94,31 +94,31 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{route('admin-dashboard')}}" class="nav-link active">
+                    <a href="{{route('admin-dashboard')}}" class="nav-link nav-list">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin-alumni')}}" class="nav-link">
+                    <a href="{{route('admin-alumni')}}" class="nav-link nav-list">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>Alumnis</p>
+                        <p>Alumni</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin-announcement')}}" class="nav-link">
+                    <a href="{{route('admin-announcement')}}" class="nav-link nav-list">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>Announcements</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin-news')}}" class="nav-link">
+                    <a href="{{route('admin-news')}}" class="nav-link nav-list">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>News & Articles</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin-gallery')}}" class="nav-link">
+                    <a href="{{route('admin-gallery')}}" class="nav-link nav-list">
                         <i class="nav-icon fas fa-images"></i>
                         <p>Gallery</p>
                     </a>

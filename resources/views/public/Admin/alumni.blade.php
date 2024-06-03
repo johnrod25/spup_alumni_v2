@@ -42,7 +42,7 @@
                                         id="edit-alumni" value="{{ $data->id }}"><i class="fa fa-edit"
                                             aria-hidden="true"></i></a>
                                     <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm"
-                                        id="delete-new" value="{{ $data->id }}"><i class="fa fa-trash"
+                                        id="delete-alumni" value="{{ $data->id }}"><i class="fa fa-trash"
                                             aria-hidden="true"></i></a>
                                     <form action="{{ route('delete-alumni', $data->id) }}" method="post"
                                         class="form-hidden" id="delete-form">
@@ -63,99 +63,150 @@
 </div>
 <!-- /.row -->
 
-<div class="modal fade" id="modal-alumni">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Add new</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="row g-3 needs-validation px-3" id="form-sched" runat="server" novalidate>
-                    <!-- First Row -->
-                    <div class="col-md-12">
-                        <img src="#" alt="..." id="preview" class="card img-preview" />
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Image</label>
-                            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                            <input type="file" accept="image/*" name="image" id="image" class="form-control"
-                                onchange="img_preview(event,'preview')">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" name="title" id="title" class="form-control"
-                                placeholder="Enter title">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Content</label>
-                            <textarea name="content" id="content" class="form-control"
-                                placeholder="Enter content" rows="4" cols="50"></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="add-new">Add new</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
 <div class="modal fade" id="modal-edit">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit new</h4>
+                <h4 class="modal-title">Edit Alumni Information</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="row g-3 needs-validation px-3" id="form-sched-edit" novalidate>
+                <form class="container-fluid needs-validation px-3" id="form-sched-edit" novalidate>
                     <!-- First Row -->
-                    <div class="col-md-12">
-                        <img src="{{ asset('images/qsu-logo.jpg') }}" alt="..." id="edit_preview"
-                            class="card img-preview" />
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Image</label>
-                            <input type="hidden" name="edit_id" id="edit_id" class="form-control">
-                            <input type="file" name="image" accept="image/*" id="edit_image"
-                                class="form-control" onchange="img_preview(event,'edit_preview')">
+                    <div class="row container-fluid d-flex align-items-center justify-content-center">
+                        <h5 class="text-bold col-md-12">PERSONAL INFORMATION</h5>
+                        <div class="col-md-4 form-group">
+                            <label>Last Name</label>
+                            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="user_id" id="edit_id">
+                            <input type="text" class="form-control" name="lastname" id="edit_lastname" placeholder="Enter Last Name" required>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" name="firstname" id="edit_firstname" placeholder="Enter First Name" required>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Middle Name</label>
+                            <input type="text" class="form-control" name="middlename" id="edit_middlename" placeholder="Enter Middle Name" required>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Student Number(Optional)</label>
+                            <input type="text" class="form-control" name="student_number" id="edit_student_number" placeholder="Enter Student Number"
+                                required>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" id="edit_email" placeholder="Enter Email Address" required>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Phone Number</label>
+                            <input type="text" class="form-control" name="phone_number" id="edit_phone_number" placeholder="Enter Phone Number" required>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <label>Home Address</label>
+                            <input type="text" class="form-control" name="home_address" id="edit_home_address" placeholder="Enter Home Address" required>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Birth Date</label>
+                            <input type="date" class="form-control" name="birthdate" id="edit_birthdate" placeholder="Enter Birth Date" required>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" name="title" id="edit_title" class="form-control"
-                                placeholder="Enter title">
+                    <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">
+                        <h5 class="text-bold col-12">ACADEMIC PROGRAM/ DEGREE IN ST.PAUL UNIVERSITY PHILIPPINES</h5>
+                        <div class="col-md-6 form-group">
+                            <label>Program(s)/Degree(s) Completed in St. Paul University</label>
+                            <select name="degree" id="edit_degree" placeholder="Enter Program/ Degree" class="form-select form-control" required>
+                                <option value=""></option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Computer Science">Computer Science</option>
+                            </select>
+                            {{-- <input type="text" class="form-control" name="degree" placeholder="Enter Program/ Degree" required> --}}
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Content</label>
-                            <textarea name="content" id="edit_content" class="form-control"
-                                placeholder="Enter content" rows="4" cols="50"></textarea>
+                        <div class="col-md-6 form-group">
+                            <label>What Batch(es) do you belong?</label>
+                            <select name="batch" id="edit_batch" placeholder="Select batch" class="form-select form-control" required>
+                                <option value=""></option>
+                                <option value="HS BATCH78">HS BATCH78</option>
+                                <option value="BSN BATCH90">BSN BATCH90</option>
+                                <option value="MBA BATCH2009">MBA BATCH2009</option>
+                            </select>
+                            {{-- <input type="text" class="form-control" name="batch" placeholder="EG. HS BATCH78; BSN BATCH90; MBA BATCH2009,ETC." required> --}}
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Please indicate how you would want to br involved in your Alma Mater</label>
+                            <select name="involve_purpose" id="edit_involve_purpose"
+                                placeholder="Please indicate how you would want to br involved in your Alma Mater" class="form-select form-control"
+                                required>
+                                <option value=""></option>
+                                <option value="Consultant">Consultant</option>
+                                <option value="Resource Speaker">Resource Speaker</option>
+                                <option value="Standing Committee Member">Standing Committee Member</option>
+                                <option value="Advisory Committee Member">Advisory Committee Member</option>
+                                <option value="Part-time Faculty">Part-time Faculty</option>
+                                <option value="Panel member in Theses/Dissertation Validation">Panel member in Theses/Dissertation
+                                    Validation</option>
+                                <option value="Marketing Campaign">Marketing Campaign</option>
+                                <option value="Mentoring Current Students">Mentoring Current Students</option>
+                                <option value="Supporting recent graduates as they start their career.">Supporting recent graduates as
+                                    they start their career.</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Year Graduated/ Last Year Attended</label>
+                            <input type="date" id="edit_year_graduated" class="form-control" name="year_graduated"
+                                placeholder="Enter Year Graduated/ Last Year Attended" required>
+                        </div>
+                        <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">
+                            <h5 class="text-bold col-12">ABOUT YOUR WORK</h5>
+                            <div class="col-md-4 form-group">
+                                <label>Company Name/ Employer</label>
+                                <input type="text" class="form-control" name="company_name" id="edit_company_name"
+                                    placeholder="Enter Company Name/ Employer" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Specialization/ Expertise/ Industry</label>
+                                <input type="text" class="form-control" name="specialization" id="edit_specialization" placeholder="Enter Speacialization.."
+                                    required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Designation/ Occupation</label>
+                                <input type="text" class="form-control" name="occupation" id="edit_occupation" placeholder="Enter ..." required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Work Engagement Status</label>
+                                <select name="work_status" id="edit_work_status" class="form-select form-control" required>
+                                    <option value=""></option>
+                                    <option value="Employer">Employer/ Company or Business Owner</option>
+                                    <option value="Full time">Full Time Employee</option>
+                                    <option value="Part time">Part Time Employee</option>
+                                    <option value="self-employed">Self Employed</option>
+                                    <option value="freelance">Freelance Consultant/ Service Provider</option>
+                                    <option value="retiree">Retiree</option>
+                                    {{-- <option value="others">Others</option> --}}
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>How long did it take before you were employed after graduation?</label>
+                                <select name="before_employed" id="edit_before_employed" class="form-select form-control" required>
+                                    <option value=""></option>
+                                    <option value="1-3">One to three (1-3) months</option>
+                                    <option value="4-6">Four to six (4-6) months</option>
+                                    <option value="7-11">Seven to eleven (7-11) months</option>
+                                    <option value="1 year">One year</option>
+                                    <option value="1-2 years">One to two years</option>
+                                    <option value="2 years or more">Two years or more</option>
+                                    <option value="na">N/A</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="update-new">Update new</button>
+                <button type="button" class="btn btn-primary" id="update-alumni">Update new</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -166,14 +217,7 @@
 @include('public.Admin.footer')
 
 <script>
-    var img_preview = function(event, myId) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById(myId);
-            output.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    };
+
     $(document).on("click", "#add-new", function(e) {
         e.preventDefault();
         let image = document.getElementById('image');
@@ -214,11 +258,11 @@
         }
     });
 
-    $(document).on("click", "#edit-new", function(e) {
+    $(document).on("click", "#edit-alumni", function(e) {
         e.preventDefault();
         var id = $(this).attr("value");
         $.ajax({
-            url: "{{ route('edit-news') }}",
+            url: "{{ route('edit-alumni') }}",
             type: "post",
             dataType: "json",
             data: {
@@ -228,15 +272,24 @@
             success: function(data) {
                 if (data.response === 'success') {
                     $('#modal-edit').modal('show');
-                    $("#edit_id").val(data.news[0].id);
-                    $("#edit_title").val(data.news[0].title);
-                    $("#edit_content").val(data.news[0].content);
-                    // $("#edit_image").val(data.news[0].image_path);
-                    let image_path = data.news[0].image_path;
-                    let edit_preview = document.getElementById('edit_preview');
-                    let assetImg = "{{ asset('images/news/picmo') }}";
-                    edit_preview.src = assetImg.replace('picmo', `${image_path}`);
-                    console.log(image_path)
+                    $("#edit_id").val(data.user[0].user_id);
+                    $("#edit_lastname").val(data.user[0].user.lastname);
+                    $("#edit_firstname").val(data.user[0].user.firstname);
+                    $("#edit_middlename").val(data.user[0].user.middlename);
+                    $("#edit_student_number").val(data.user[0].user.student_number);
+                    $("#edit_email").val(data.user[0].user.email);
+                    $("#edit_phone_number").val(data.user[0].user.phone_number);
+                    $("#edit_home_address").val(data.user[0].user.home_address);
+                    $("#edit_birthdate").val(data.user[0].user.birthdate);
+                    $("#edit_degree").val(data.user[0].user.degree);
+                    $("#edit_batch").val(data.user[0].user.batch);
+                    $("#edit_involve_purpose").val(data.user[0].user.involve_purpose);
+                    $("#edit_year_graduated").val(data.user[0].user.year_graduated);
+                    $("#edit_company_name").val(data.user[0].user.company_name);
+                    $("#edit_specialization").val(data.user[0].user.specialization);
+                    $("#edit_occupation").val(data.user[0].user.occupation);
+                    $("#edit_work_status").val(data.user[0].user.work_status);
+                    $("#edit_before_employed").val(data.user[0].user.before_employed);
                 } else {
                     errorToast(data.message);
                 }
@@ -245,7 +298,7 @@
 
     });
 
-    $(document).on("click", "#update-new", function(e) {
+    $(document).on("click", "#update-alumni", function(e) {
         e.preventDefault();
         let edit_id = $("#edit_id").val();
         let edit_title = $("#edit_title").val();

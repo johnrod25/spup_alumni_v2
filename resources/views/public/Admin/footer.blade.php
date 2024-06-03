@@ -81,6 +81,23 @@
             }
             localStorage.clear();
         }
+
+        $(".nav-list").click(function() {
+            $(this).addClass('active');
+            let text = $(this).find('p').text();
+            localStorage.setItem('selectedTab', text);
+            $('.nav-list').find('p').each(function() {
+                if ($(this).text() !== text) {
+                    $(this).parent().removeClass('active');
+                }
+            })
+        });
+        let selectedTab = localStorage.getItem('selectedTab');
+        $('.nav-list').find('p').each(function() {
+            if ($(this).text() === selectedTab) {
+                $(this).parent().addClass('active');
+            }
+        })
     });
 
     function successToast(message) {
