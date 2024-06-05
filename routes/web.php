@@ -25,7 +25,7 @@ Route::get('/login', function () {
 })->middleware('guest');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::post('/Change-password', [LoginController::class, 'changePassword'])->name('change_password');
+// Route::post('/Change-password', [LoginController::class, 'changePassword'])->name('change_password');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/register', 'public.Home.register')->name('register');

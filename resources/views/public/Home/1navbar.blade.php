@@ -1,4 +1,4 @@
-<header id="header" class="position-absolute container-fluid header-transparent border-bottom">
+<header id="header" class="position-absolute container-fluid header-transparent">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid px-5">
             {{-- <a class="navbar-brand" href="#"><img src="{{asset('images/qsu-logo.jpg')}}" alt="..."> <span>University of Philippines</span></a> --}}
@@ -9,22 +9,22 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown" style="color: white">
                 <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                        <a class="nav-link text-success" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#about">About</a>
+                        <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#announcements">Announcements</a>
+                        <a class="nav-link" href="#announcements">Announcements</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#services">Services</a>
+                        <a class="nav-link" href="#services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#news">News & Articles</a>
+                        <a class="nav-link" href="#news">News & Articles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#gallery">Gallery</a>
+                        <a class="nav-link" href="#gallery">Gallery</a>
                     </li>
                     {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -38,7 +38,7 @@
                         </ul>
                     </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/#contact">Contact</a>
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>

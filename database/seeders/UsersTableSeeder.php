@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'usertype' => '1',
+            'is_deleted' => 0,
         ]);
     }
 }

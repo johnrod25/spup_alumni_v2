@@ -56,8 +56,34 @@
             <label>Program(s)/Degree(s) Completed in St. Paul University</label>
             <select name="degree" placeholder="Enter Program/ Degree" class="form-select" required>
                 <option value=""></option>
-                <option value="Information Technology">Information Technology</option>
-                <option value="Computer Science">Computer Science</option>
+                <option value="Bachelor of Arts in English Language Studies">Bachelor of Arts in English Language Studies</option>
+                <option value="Bachelor of Science in Psychology">Bachelor of Science in Psychology</option>
+                <option value="Bachelor of Science in Biology">Bachelor of Science in Biology</option>
+                <option value="Bachelor of Science in Social Work">Bachelor of Science in Social Work</option>
+                <option value="Bachelor of Science in Public Administration">Bachelor of Science in Public Administration</option>
+                <option value="Bachelor of Science in Biology Major in MicroBiology">Bachelor of Science in Biology Major in MicroBiology</option>
+                <option value="Bachelor of Secondary Education">Bachelor of Secondary Education</option>
+                <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
+                <option value="Bachelor of Physical Education">Bachelor of Physical Education</option>
+                <option value="Bachelor of Science in Accountancy">Bachelor of Science in Accountancy</option>
+                <option value="Bachelor of Science in Entrepreneurship">Bachelor of Science in Entrepreneurship</option>
+                <option value="Bachelor of Science in Business Administration major in: Marketing Management, Financial Management and Operations Management">Bachelor of Science in Business Administration major in: Marketing Management, Financial Management and Operations Management</option>
+                <option value="Bachelor of Science in Management Accounting">Bachelor of Science in Management Accounting</option>
+                <option value="Bachelor of Science in Hospitality Management">Bachelor of Science in Hospitality Management</option>
+                <option value="Bachelor of Science in Tourism Management">Bachelor of Science in Tourism Management</option>
+                <option value="Bachelor of Science in Product Design and Marketing Innovation">Bachelor of Science in Product Design and Marketing Innovation</option>
+                <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+                <option value="Bachelor of Library and Information Science">Bachelor of Library and Information Science</option>
+                <option value="Bachelor of Science in Civil Engineering">Bachelor of Science in Civil Engineering</option>
+                <option value="Bachelor of Science in Environmental and Sanitary Engineering">Bachelor of Science in Environmental and Sanitary Engineering</option>
+                <option value="Bachelor of Science in Computer Engineering">Bachelor of Science in Computer Engineering</option>
+                <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing</option>
+                <option value="Bachelor of Science in Pharmacy">Bachelor of Science in Pharmacy</option>
+                <option value="Bachelor of Science in Medical Technology">Bachelor of Science in Medical Technology</option>
+                <option value="Bachelor of Science in Physical Therapy">Bachelor of Science in Physical Therapy</option>
+                <option value="Bachelor of Science in Radiologic Technology">Bachelor of Science in Radiologic Technology</option>
+                <option value="Bachelor of Science in Midwifery">Bachelor of Science in Midwifery</option>
+                <option value="Doctor of Medicine">Doctor of Medicine</option>
             </select>
             {{-- <input type="text" class="form-control" name="degree" placeholder="Enter Program/ Degree" required> --}}
         </div>

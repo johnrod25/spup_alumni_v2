@@ -1,5 +1,7 @@
 @include('public.Home.header')
-<div class="container mt-5 data-policy-box">
+@include('public.Home.navbar')
+
+<div class="container data-policy-box">
     <h3 class="text-bold m-2">REGISTRATION <span style="font-weight:normal">Data Policy Agreement</span></h3>
     <div class="container-fluid">
         <div class="bg-light p-3 d-flex flex-column justify-content-center align-items-center border">

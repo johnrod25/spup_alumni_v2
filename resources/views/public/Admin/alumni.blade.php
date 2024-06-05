@@ -39,7 +39,7 @@
                                 <td>{{ $data->created_at }}</td>
                                 <td class="text-center">
                                     <a data-toggle="tooltip" title="Edit" class="btn btn-primary btn-sm"
-                                        id="edit-alumni" value="{{ $data->id }}"><i class="fa fa-edit"
+                                        id="edit-alumni" value="{{ $data->user_id }}"><i class="fa fa-edit"
                                             aria-hidden="true"></i></a>
                                     <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm"
                                         id="delete-alumni" value="{{ $data->id }}"><i class="fa fa-trash"
@@ -301,23 +301,29 @@
     $(document).on("click", "#update-alumni", function(e) {
         e.preventDefault();
         let edit_id = $("#edit_id").val();
-        let edit_title = $("#edit_title").val();
-        let edit_content = $("#edit_content").val();
-        let edit_image = document.getElementById('edit_image');
-
-
         let formData = new FormData();
         formData.append('_token', $('#token').val());
         formData.append('id', edit_id);
-        if (edit_image.files.length != 0) {
-            formData.append('image', edit_image.files[0]);
-        } else {
-            formData.append('image', null);
-        }
-        formData.append('title', edit_title);
-        formData.append('content', edit_content);
+        formData.append('lastname',$("#edit_lastname").val());
+        formData.append('firstname',$("#edit_firstname").val());
+        formData.append('middlename',$("#edit_middlename").val());
+        formData.append('student_number',$("#edit_student_number").val());
+        formData.append('email',$("#edit_email").val());
+        formData.append('phone_number',$("#edit_phone_number").val());
+        formData.append('home_address',$("#edit_home_address").val());
+        formData.append('birthdate',$("#edit_birthdate").val());
+        formData.append('degree',$("#edit_degree").val());
+        formData.append('batch',$("#edit_batch").val());
+        formData.append('involve_purpose',$("#edit_involve_purpose").val());
+        formData.append('year_graduated',$("#edit_year_graduated").val());
+        formData.append('company_name',$("#edit_company_name").val());
+        formData.append('specialization',$("#edit_specialization").val());
+        formData.append('occupation',$("#edit_occupation").val());
+        formData.append('work_status',$("#edit_work_status").val());
+        formData.append('before_employed',$("#edit_before_employed").val());
+
         $.ajax({
-            url: "{{ route('update-news') }}",
+            url: "{{ route('update-alumni') }}",
             type: "post",
             dataType: "json",
             data: formData,

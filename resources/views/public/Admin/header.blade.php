@@ -50,7 +50,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <!-- <a href="#" class="btn btn-default btn-flat">Profile</a> -->
-                <button class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-profile">Change Passsword</button>
+                {{-- <button class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-profile">Change Passsword</button> --}}
                 <a href="#logout" class="btn btn-danger btn-flat float-right" onclick="document.getElementById('logoutForm').submit()">Sign out</a>
                 <form method="post" id="logoutForm" action="{{ route('logout') }}">
                     @csrf

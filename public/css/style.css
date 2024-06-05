@@ -124,6 +124,7 @@ a img {
 }
 .data-policy-box {
     color: black;
+    margin-top: 80px;
 }
 .container-dpa {
     /* border: 1px solid var(--cool-gray); */

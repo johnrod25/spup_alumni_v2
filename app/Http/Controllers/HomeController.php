@@ -57,6 +57,7 @@ class HomeController extends Controller
             'username' => $request->email,
             'password' => bcrypt($request->lastname.$request->student_number),
             'usertype' => 2,
+            'is_deleted' => 0,
         ]);
         $data->save();
 

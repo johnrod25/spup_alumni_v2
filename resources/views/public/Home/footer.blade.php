@@ -16,10 +16,10 @@
                   <div class="col-lg-3 col-md-6 col-sm-6 footer-links">
                       <h4>Useful Links</h4>
                       <ul>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#services">Services</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#events">News & Features</a></li>
+                          <li><i class="bx bx-chevron-right"></i> <a href="/#">Home</a></li>
+                          <li><i class="bx bx-chevron-right"></i> <a href="/#about">About us</a></li>
+                          <li><i class="bx bx-chevron-right"></i> <a href="/#services">Services</a></li>
+                          <li><i class="bx bx-chevron-right"></i> <a href="/#gallery">Gallery</a></li>
                           <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
                       </ul>
                   </div>
@@ -184,6 +184,11 @@
               "hideMethod": "fadeOut"
           }
       }
+
+      $(document).on("click", 'ul li .nav-link', function(){
+    $('ul li .nav-link').removeClass('text-success');
+    $(this).addClass('text-success');
+});
   </script>
   </body>
 

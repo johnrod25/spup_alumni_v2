@@ -24,6 +24,7 @@ class User extends Authenticatable
         'username',
         'password',
         'usertype',
+        'is_deleted',
     ];
 
     public function user(): BelongsTo
