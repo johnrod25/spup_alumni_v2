@@ -37,6 +37,7 @@
             <label>Password</label>
             <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
         </div> --}}
+
         <div class="col-md-4 form-group">
             <label>Phone Number</label>
             <input type="text" class="form-control" name="phone_number" placeholder="Enter Phone Number" required>
@@ -89,13 +90,13 @@
         </div>
         <div class="col-md-6 form-group">
             <label>What Batch(es) do you belong?</label>
-            <select name="batch" placeholder="Select batch" class="form-select" required>
+            {{-- <select name="batch" placeholder="Select batch" class="form-select" required>
                 <option value=""></option>
                 <option value="HS BATCH78">HS BATCH78</option>
                 <option value="BSN BATCH90">BSN BATCH90</option>
                 <option value="MBA BATCH2009">MBA BATCH2009</option>
-            </select>
-            {{-- <input type="text" class="form-control" name="batch" placeholder="EG. HS BATCH78; BSN BATCH90; MBA BATCH2009,ETC." required> --}}
+            </select> --}}
+            <input type="text" class="form-control" name="batch" placeholder="EG. HS BATCH78; BSN BATCH90; MBA BATCH2009,ETC." required>
         </div>
         <div class="col-md-6 form-group">
             <label>Please indicate how you would want to br involved in your Alma Mater</label>
