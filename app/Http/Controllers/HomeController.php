@@ -31,11 +31,34 @@ class HomeController extends Controller
     }
 
     public function register_form_submit(Request $request){
+        $validated = $request->validate([
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'middlename' => 'required',
+            // 'student_number' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required|digits:11',
+            'home_address' => 'required',
+            'birthdate' => 'required',
+            'degree' => 'required',
+            'batch' => 'required',
+            'involve_purpose' => 'required',
+            'year_graduated' => 'required|before:today',
+            'company_name' => 'required',
+            'specialization' => 'required',
+            'occupation' => 'required',
+            'work_status' => 'required',
+            'before_employed' => 'required',
+        ]);
+        $student_number = "";
+        if($request->student_number != null){
+            $student_number = $request->student_number;
+        }
         User_Details::create([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
             'middlename' => $request->middlename,
-            'student_number' => $request->student_number,
+            'student_number' => $student_number,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'home_address' => $request->home_address,

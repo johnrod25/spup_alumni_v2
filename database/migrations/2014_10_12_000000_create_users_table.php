@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('usertype');
-            $table->string('is_deleted');
+            $table->string('is_deleted')->default(0);
+            $table->integer('is_approved')->default(0);
             $table->timestamps();
         });
     }

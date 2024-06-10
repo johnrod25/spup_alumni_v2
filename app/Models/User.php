@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User_Details::class,'user_id','id');
+        return $this->belongsTo(User_Details::class,'user_id','id')->orderBy('degree','desc');
     }
     /**
      * The attributes that should be hidden for serialization.

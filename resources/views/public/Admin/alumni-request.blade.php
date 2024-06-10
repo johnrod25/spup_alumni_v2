@@ -5,8 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h3>Manage Alumni</h3>
-                    <a href="{{ route('generate.pdf') }}" class="btn btn-primary">Generate PDF</a>
+                    <h3>Manage Alumni Request</h3>
                 </div>
                 <hr class="hr">
                 <table id="example" class="table table-bordered table-striped table-hover">
@@ -39,15 +38,21 @@
                                 <td>{{ $data->user->year_graduated }}</td>
                                 <td>{{ $data->created_at }}</td>
                                 <td class="text-center">
-                                    <a data-toggle="tooltip" title="Edit" class="btn btn-primary btn-sm"
-                                        id="edit-alumni" value="{{ $data->user_id }}"><i class="fa fa-edit"
+                                    <a data-toggle="tooltip" title="View" class="btn btn-success btn-sm"
+                                        id="edit-alumni" value="{{ $data->user_id }}"><i class="fa fa-eye"
                                             aria-hidden="true"></i></a>
-                                    <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm"
-                                        id="delete-alumni" value="{{ $data->id }}"><i class="fa fa-trash"
+                                    <a data-toggle="tooltip" title="Approve" class="btn btn-primary btn-sm"
+                                        id="approve-alumni" value="{{ $data->id }}"><i class="fa fa-thumbs-up"
                                             aria-hidden="true"></i></a>
-                                    <form action="{{ route('delete-alumni', $data->id) }}" method="post"
-                                        class="form-hidden" id="delete-form">
-                                        {{-- <button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button> --}}
+                                    <form action="{{ route('admin-alumni-approved', $data->id) }}" method="post"
+                                        class="form-hidden" id="approve-form">
+                                        @csrf
+                                    </form>
+                                    <a data-toggle="tooltip" title="Reject" class="btn btn-danger btn-sm"
+                                        id="reject-alumni" value="{{ $data->id }}"><i class="fa fa-thumbs-down"
+                                            aria-hidden="true"></i></a>
+                                    <form action="{{ route('admin-alumni-reject', $data->id) }}" method="post"
+                                        class="form-hidden" id="reject-form">
                                         @csrf
                                     </form>
                                 </td>
@@ -68,7 +73,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Alumni Information</h4>
+                <h4 class="modal-title">View Alumni Information</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -125,97 +130,19 @@
                         <h5 class="text-bold col-12">ACADEMIC PROGRAM/ DEGREE IN ST.PAUL UNIVERSITY PHILIPPINES</h5>
                         <div class="col-md-6 form-group">
                             <label>Program(s)/Degree(s) Completed in St. Paul University</label>
-                            <select name="degree" id="edit_degree" placeholder="Enter Program/ Degree"
-                                class="form-select form-control" required>
-                                <option value=""></option>
-                                <option value="Bachelor of Arts in English Language Studies">Bachelor of Arts in
-                                    English Language Studies</option>
-                                <option value="Bachelor of Science in Psychology">Bachelor of Science in Psychology
-                                </option>
-                                <option value="Bachelor of Science in Biology">Bachelor of Science in Biology</option>
-                                <option value="Bachelor of Science in Social Work">Bachelor of Science in Social Work
-                                </option>
-                                <option value="Bachelor of Science in Public Administration">Bachelor of Science in
-                                    Public Administration</option>
-                                <option value="Bachelor of Science in Biology Major in MicroBiology">Bachelor of
-                                    Science in Biology Major in MicroBiology</option>
-                                <option value="Bachelor of Secondary Education">Bachelor of Secondary Education
-                                </option>
-                                <option value="Bachelor of Elementary Education">Bachelor of Elementary Education
-                                </option>
-                                <option value="Bachelor of Physical Education">Bachelor of Physical Education</option>
-                                <option value="Bachelor of Science in Accountancy">Bachelor of Science in Accountancy
-                                </option>
-                                <option value="Bachelor of Science in Entrepreneurship">Bachelor of Science in
-                                    Entrepreneurship</option>
-                                <option
-                                    value="Bachelor of Science in Business Administration major in: Marketing Management, Financial Management and Operations Management">
-                                    Bachelor of Science in Business Administration major in: Marketing Management,
-                                    Financial Management and Operations Management</option>
-                                <option value="Bachelor of Science in Management Accounting">Bachelor of Science in
-                                    Management Accounting</option>
-                                <option value="Bachelor of Science in Hospitality Management">Bachelor of Science in
-                                    Hospitality Management</option>
-                                <option value="Bachelor of Science in Tourism Management">Bachelor of Science in
-                                    Tourism Management</option>
-                                <option value="Bachelor of Science in Product Design and Marketing Innovation">Bachelor
-                                    of Science in Product Design and Marketing Innovation</option>
-                                <option value="Bachelor of Science in Information Technology">Bachelor of Science in
-                                    Information Technology</option>
-                                <option value="Bachelor of Library and Information Science">Bachelor of Library and
-                                    Information Science</option>
-                                <option value="Bachelor of Science in Civil Engineering">Bachelor of Science in Civil
-                                    Engineering</option>
-                                <option value="Bachelor of Science in Environmental and Sanitary Engineering">Bachelor
-                                    of Science in Environmental and Sanitary Engineering</option>
-                                <option value="Bachelor of Science in Computer Engineering">Bachelor of Science in
-                                    Computer Engineering</option>
-                                <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing</option>
-                                <option value="Bachelor of Science in Pharmacy">Bachelor of Science in Pharmacy
-                                </option>
-                                <option value="Bachelor of Science in Medical Technology">Bachelor of Science in
-                                    Medical Technology</option>
-                                <option value="Bachelor of Science in Physical Therapy">Bachelor of Science in Physical
-                                    Therapy</option>
-                                <option value="Bachelor of Science in Radiologic Technology">Bachelor of Science in
-                                    Radiologic Technology</option>
-                                <option value="Bachelor of Science in Midwifery">Bachelor of Science in Midwifery
-                                </option>
-                                <option value="Doctor of Medicine">Doctor of Medicine</option>
-                            </select>
-                            {{-- <input type="text" class="form-control" name="degree" placeholder="Enter Program/ Degree" required> --}}
+                            <input type="text" name="degree" id="edit_degree"
+                                placeholder="Enter Program/ Degree" class="form-select form-control" required>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>What Batch(es) do you belong?</label>
-                            {{-- <select name="batch" id="edit_batch" placeholder="Select batch" class="form-select form-control" required>
-                                <option value=""></option>
-                                <option value="HS BATCH78">HS BATCH78</option>
-                                <option value="BSN BATCH90">BSN BATCH90</option>
-                                <option value="MBA BATCH2009">MBA BATCH2009</option>
-                            </select> --}}
                             <input type="text" id="edit_batch" class="form-control" name="batch"
                                 placeholder="EG. HS BATCH78; BSN BATCH90; MBA BATCH2009,ETC." required>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Please indicate how you would want to br involved in your Alma Mater</label>
-                            <select name="involve_purpose" id="edit_involve_purpose"
+                            <input type="text" name="involve_purpose" id="edit_involve_purpose"
                                 placeholder="Please indicate how you would want to br involved in your Alma Mater"
                                 class="form-select form-control" required>
-                                <option value=""></option>
-                                <option value="Consultant">Consultant</option>
-                                <option value="Resource Speaker">Resource Speaker</option>
-                                <option value="Standing Committee Member">Standing Committee Member</option>
-                                <option value="Advisory Committee Member">Advisory Committee Member</option>
-                                <option value="Part-time Faculty">Part-time Faculty</option>
-                                <option value="Panel member in Theses/Dissertation Validation">Panel member in
-                                    Theses/Dissertation
-                                    Validation</option>
-                                <option value="Marketing Campaign">Marketing Campaign</option>
-                                <option value="Mentoring Current Students">Mentoring Current Students</option>
-                                <option value="Supporting recent graduates as they start their career.">Supporting
-                                    recent graduates as
-                                    they start their career.</option>
-                            </select>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Year Graduated/ Last Year Attended</label>
@@ -241,39 +168,21 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Work Engagement Status</label>
-                                <select name="work_status" id="edit_work_status" class="form-select form-control"
-                                    required>
-                                    <option value=""></option>
-                                    <option value="Employer">Employer/ Company or Business Owner</option>
-                                    <option value="Full time">Full Time Employee</option>
-                                    <option value="Part time">Part Time Employee</option>
-                                    <option value="self-employed">Self Employed</option>
-                                    <option value="freelance">Freelance Consultant/ Service Provider</option>
-                                    <option value="retiree">Retiree</option>
-                                    {{-- <option value="others">Others</option> --}}
-                                </select>
+                                <input type="text" name="work_status" id="edit_work_status"
+                                    class="form-select form-control" required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>How long did it take before you were employed after graduation?</label>
-                                <select name="before_employed" id="edit_before_employed"
+                                <input type="text" name="before_employed" id="edit_before_employed"
                                     class="form-select form-control" required>
-                                    <option value=""></option>
-                                    <option value="1-3">One to three (1-3) months</option>
-                                    <option value="4-6">Four to six (4-6) months</option>
-                                    <option value="7-11">Seven to eleven (7-11) months</option>
-                                    <option value="1 year">One year</option>
-                                    <option value="1-2 years">One to two years</option>
-                                    <option value="2 years or more">Two years or more</option>
-                                    <option value="na">N/A</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="update-alumni">Update Record</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -284,46 +193,6 @@
 @include('public.Admin.footer')
 
 <script>
-    $(document).on("click", "#add-new", function(e) {
-        e.preventDefault();
-        let image = document.getElementById('image');
-        let title = $("#title").val();
-        let content = $("#content").val();
-        if (image.files.length == 0) {
-            errorToast("Image field is required");
-        } else {
-            let formData = new FormData();
-            formData.append('_token', $('#token').val());
-            formData.append('image', image.files[0]);
-            formData.append('title', title);
-            formData.append('content', content);
-            $.ajax({
-                url: '{{ route('add-news') }}',
-                type: "post",
-                dataType: "json",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    // let data = JSON.stringify(response);
-                    if (data.response == "success") {
-                        $('#modal-news').modal('hide')
-                        $("#form-sched")[0].reset();
-                        // successToast(data.message);
-                        localStorage.setItem("Notif", JSON.stringify(data));
-                        window.location.reload();
-                    } else {
-                        errorToast(data.message);
-                    }
-                },
-                error: function(response) {
-                    // console.log(response)
-                    errorToast(response.responseJSON.message);
-                }
-            });
-        }
-    });
-
     $(document).on("click", "#edit-alumni", function(e) {
         e.preventDefault();
         var id = $(this).attr("value");
@@ -356,6 +225,10 @@
                     $("#edit_occupation").val(data.user[0].user.occupation);
                     $("#edit_work_status").val(data.user[0].user.work_status);
                     $("#edit_before_employed").val(data.user[0].user.before_employed);
+                    let form_control = document.querySelectorAll('.form-control');
+                    form_control.forEach(element => {
+                        element.readOnly = true;
+                    });
                 } else {
                     errorToast(data.message);
                 }
@@ -407,12 +280,22 @@
         });
     });
 
-    $(document).on("click", "#delete-alumni", function(e) {
+    $(document).on("click", "#approve-alumni", function(e) {
         e.preventDefault();
-        var save = window.confirm('Are you sure you want to delete this?')
+        var save = window.confirm('Are you sure you want to approve this?')
         if (save == true) {
-            $('#delete-form').submit();
-            successToast('Deleted successfully.');
+            $('#approve-form').submit();
+            successToast('Approved successfully.');
+        } else {
+            return false;
+        }
+    });
+    $(document).on("click", "#reject-alumni", function(e) {
+        e.preventDefault();
+        var save = window.confirm('Are you sure you want to reject this?')
+        if (save == true) {
+            $('#reject-form').submit();
+            successToast('Reject successfully.');
         } else {
             return false;
         }

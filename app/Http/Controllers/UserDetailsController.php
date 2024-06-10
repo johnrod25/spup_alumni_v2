@@ -11,7 +11,7 @@ class UserDetailsController extends Controller
     public function index()
     {
         return view('public.Admin.alumni', [
-            'datas' => User::where('usertype','2')->where('is_deleted', 0)->orderBy('id', 'DESC')->get()
+            'datas' => User::where('usertype','2')->where('is_deleted', 0)->where('is_approved', 1)->orderBy('id', 'DESC')->get()
         ]);
     }
     public function edit_alumni(Request $request)
@@ -23,6 +23,10 @@ class UserDetailsController extends Controller
     public function update_alumni(Request $request)
     {
         $request->validate(['id' => "required"]);
+        $student_number = "";
+        if($request->student_number != null){
+            $student_number = $request->student_number;
+        }
         $data =  User::with('user')->where('user_id',$request->id)->first();
         // dd($data);
         // $data->user_id = $request->id;
@@ -33,7 +37,7 @@ class UserDetailsController extends Controller
         $data->user->lastname = $request->lastname;
         $data->user->firstname = $request->firstname;
         $data->user->middlename = $request->middlename;
-        $data->user->student_number = $request->student_number;
+        $data->user->student_number = $student_number;
         $data->user->email = $request->email;
         $data->user->phone_number = $request->phone_number;
         $data->user->home_address = $request->home_address;
@@ -59,4 +63,27 @@ class UserDetailsController extends Controller
         $data_del->save();
         return redirect()->route('admin-alumni');
     }
+
+    public function alumni_request(){
+        return view('public.Admin.alumni-request', [
+            'datas' => User::where('usertype','2')->where('is_deleted', 0)->where('is_approved', 0)->orderBy('id', 'DESC')->get()
+        ]);
+    }
+
+    public function alumni_approved($id)
+    {
+        $data_del =  User::find($id);
+        $data_del->is_approved = 1;
+        $data_del->save();
+        return redirect()->route('admin-alumni-request');
+    }
+
+    public function alumni_reject($id)
+    {
+        $data_del =  User::find($id);
+        $data_del->is_approved = 2;
+        $data_del->save();
+        return redirect()->route('admin-alumni-request');
+    }
+
 }

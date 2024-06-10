@@ -99,11 +99,26 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item dropdown">
                     <a href="{{route('admin-alumni')}}" class="nav-link nav-list">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Alumni</p>
+                        
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admin-alumni-request')}}" class="nav-link">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p>Alumni Request</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin-alumni')}}" class="nav-link">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p>Alumni List</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('admin-announcement')}}" class="nav-link nav-list">
