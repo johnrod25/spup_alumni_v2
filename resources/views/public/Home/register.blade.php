@@ -120,7 +120,7 @@
         let checkbox3 = document.getElementById('checkbox3').checked;
         // alert(checkbox1)
         if(checkbox1 == true && checkbox2 == true && checkbox3 == true){
-            window.location.href = "{{ route('register-form')}}";
+            window.location.href = "{{ route('search-record')}}";
         }else{
             errorToast('Check all check boxes.');
         }

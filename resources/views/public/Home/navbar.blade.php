@@ -26,17 +26,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/#gallery">Gallery</a>
                     </li>
-                    {{-- <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Events
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Upcoming Events</a></li>
+                            <li><a class="dropdown-item" href="{{route('book-event')}}">Book an event</a></li>
+                            {{-- <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
                         </ul>
-                    </li> --}}
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/#contact">Contact</a>
                     </li>

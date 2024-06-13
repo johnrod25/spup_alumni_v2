@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Announcement;
 use App\Models\Gallery;
 use App\Models\News;
@@ -19,6 +20,54 @@ class HomeController extends Controller
             'galleries' => Gallery::limit(12)->orderBy('id', 'DESC')->get(),
             'news' => News::limit(10)->orderBy('id', 'DESC')->get(),
         ]);
+    }
+
+    public function search_record()
+    {
+        return view('public.Home.search-record');
+    }
+
+    public function search_record_submit(Request $request)
+    {
+        if($request->row_number == 1){
+            $validated = $request->validate([
+                'lastname' => 'required',
+                'firstname' => 'required',
+                'middlename' => 'required',
+                'birthdate' => 'required',
+            ]);
+            $users = DB::table('users')
+            ->leftJoin('user__details', 'users.user_id', '=', 'user__details.id')
+            ->where('lastname',$request->lastname)
+            ->where('firstname',$request->firstname)
+            ->where('middlename',$request->middlename)
+            ->where('birthdate',$request->birthdate)
+            ->count();
+        } else {
+            $validated = $request->validate([
+                'student_number' => 'required',
+                'last_name' => 'required',
+            ]);
+            $users = DB::table('users')
+            ->leftJoin('user__details', 'users.user_id', '=', 'user__details.id')
+            ->where('lastname',$request->last_name)
+            ->where('student_number',$request->student_number)
+            ->count();
+        }
+
+        if($users == 0){
+            return back()->with([
+                'status' => 'warning',
+                'message' => 'We apologize but your record is not on our database, kindly double check your data and try again. or you may input your data manually.',
+                'count' => $users,
+        ]);
+        }else{
+            return back()->with([
+                'status' => 'success',
+                'message' => 'You are already registered.',
+                'count' => $users,
+        ]);
+        }
     }
 
     public function register_form()
@@ -84,6 +133,11 @@ class HomeController extends Controller
         ]);
         $data->save();
 
-        return back()->with(['success_message' => 'Registered Successfully.']);
+        // return back()->with(['success_message' => 'Registered Successfully.']);
+        return redirect('/');
+    }
+
+    public function book_event(){
+        return view('public.Home.event-booking');
     }
 }

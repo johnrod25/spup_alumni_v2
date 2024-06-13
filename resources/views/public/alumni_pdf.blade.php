@@ -5,19 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: .7rem;
+        }
         #customers {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
-            width: 100%;
+            max-width: 100vh;
+
         }
 
         #customers td,
         #customers th {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 3px 8px;
         }
 
         #customers tr:nth-child(even) {
@@ -29,27 +33,42 @@
         }
 
         #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
+            /* padding-top: 12px; */
+            padding: 3px;
             text-align: left;
             background-color: #1c8502;
             color: white;
         }
 
-        .navbar-brand {
-            color: #000;
-            font-size: 25px;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 2px;
-            /* background: #000; */
-        }
-
-        a img {
-            height: 50px;
+        .spup-text img {
+            height: 60px;
             margin-right: 10px;
         }
         .text-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .border-green-bottom {
+            border-bottom: 1px solid green;
+            /* width: 100%; */
+        }
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+        .container {
+            /* width: 90%; */
+            /* font-size: 1.2rem; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .spup-text {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -58,14 +77,20 @@
 </head>
 
 <body>
-    <div class="header container-fluid d-flex justify-content-center p-2 bg-warning">
-        <a class="navbar-brand text-center">
-            <img src="https://th.bing.com/th/id/OIP.uQoteXTXqkcjTRP3A2VJ2wHaHa?rs=1&pid=ImgDetMain"
-                alt="..."> <span class="logo-text mx-3" style="font-size: 1.5rem">ST. PAUL UNIVERSITY
-                PHILIPPINES</span></a>
+    <div class="container border-green-bottom">
+        <a class=" text-center">
+            <div class="header-text">
+                <div class="spup-text">
+                    <img src="https://clipground.com/images/saint-pauls-university-clipart-4.jpg" alt="...">
+                    <div>
+                        <h3>St. Paul University Philippines</h3>
+                        <p>Tuguegarao City, Cagayan 3500</p>
+                    </div>
+                </div>
+                <h3>OFFICE OF ALUMNI AND EXTERNAL RELATIONS</h3>
+            </div>
     </div>
     <div class="container">
-        <h2 style="text-align: center">Alumni List</h2>
         @foreach ($grouped_users as $degree => $users)
             <h3 class="my-3">{{ ucfirst($degree) }}</h3>
             <table id="customers" class="table table-bordered table-striped table-hover">
@@ -82,9 +107,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($users as $index=>$user)
                         <tr>
-                            <td>{{ $user->name }}</td>
+                            <td>{{ $index+1 }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone_number }}</td>

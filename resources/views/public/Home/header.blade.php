@@ -53,9 +53,9 @@
                             <a class="btn btn-danger px-3" aria-current="page"
                                 href="{{ route('register') }}">Register</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="btn btn-primary px-3" href="{{ route('login') }}">Login</a>
-                        </li>
+                        </li> --}}
                     @else
                         <li>
                             <a href="#" class="btn btn-danger px-3"

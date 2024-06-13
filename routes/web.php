@@ -31,13 +31,18 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/register', 'public.Home.register')->name('register');
 Route::get('/register-form',[HomeController::class, 'register_form'])->name('register-form');
 Route::post('/register-form-submit',[HomeController::class, 'register_form_submit'])->name('register-form-submit');
+Route::get('/search-record',[HomeController::class, 'search_record'])->name('search-record');
+Route::post('/search-record',[HomeController::class, 'search_record_submit'])->name('search-record-submit');
+
+Route::get('/announcement/{id}', [AnnouncementController::class, 'show_announcement'])->name('show-announcement');
+Route::get('/news/{id}', [NewsController::class, 'show_news'])->name('show-news');
+// Route::view('/login', 'public.Home.login')->name('login');
+Route::get('/announcement', [AnnouncementController::class, 'show_all_announcement'])->name('all-announcements');
+Route::get('/news', [NewsController::class, 'show_all_news'])->name('all-news');
+//BOOK AN EVENT
+Route::get('/book-event', [HomeController::class, 'book_event'])->name('book-event');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/announcement/{id}', [AnnouncementController::class, 'show_announcement'])->name('show-announcement');
-    Route::get('/news/{id}', [NewsController::class, 'show_news'])->name('show-news');
-    // Route::view('/login', 'public.Home.login')->name('login');
-    Route::get('/announcement', [AnnouncementController::class, 'show_all_announcement'])->name('all-announcements');
-    Route::get('/news', [NewsController::class, 'show_all_news'])->name('all-news');
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard');
 
     //ALUMNI
@@ -52,7 +57,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/alumni-request', [UserDetailsController::class, 'alumni_request'])->name('admin-alumni-request');
     Route::post('/admin/alumni-approved/{id}', [UserDetailsController::class, 'alumni_approved'])->name('admin-alumni-approved');
     Route::post('/admin/alumni-reject/{id}', [UserDetailsController::class, 'alumni_reject'])->name('admin-alumni-reject');
-
 
     //ANNOUNCEMENTS
     Route::get('/admin/announcement', [AnnouncementController::class, 'index'])->name('admin-announcement');
