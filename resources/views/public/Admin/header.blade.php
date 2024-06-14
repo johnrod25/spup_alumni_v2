@@ -102,7 +102,7 @@
                 <li class="nav-item dropdown">
                     <a href="{{route('admin-alumni')}}" class="nav-link nav-list">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>Alumni</p>
+                        <p>Alumni <i class="right fas fa-angle-left"></i></p>
                         
                     </a>
                     <ul class="nav nav-treeview">
@@ -116,6 +116,27 @@
                             <a href="{{route('admin-alumni')}}" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p>Alumni List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="{{route('admin-book')}}" class="nav-link nav-list">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>Book Event <i class="right fas fa-angle-left"></i></p>
+                        
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admin-book-request')}}" class="nav-link">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p>Book Request</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin-book')}}" class="nav-link">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p>Book List</p>
                             </a>
                         </li>
                     </ul>

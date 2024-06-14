@@ -137,7 +137,5 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-    public function book_event(){
-        return view('public.Home.event-booking');
-    }
+    
 }

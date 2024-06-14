@@ -9,6 +9,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserDetailsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\BookingEventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,7 +41,8 @@ Route::get('/news/{id}', [NewsController::class, 'show_news'])->name('show-news'
 Route::get('/announcement', [AnnouncementController::class, 'show_all_announcement'])->name('all-announcements');
 Route::get('/news', [NewsController::class, 'show_all_news'])->name('all-news');
 //BOOK AN EVENT
-Route::get('/book-event', [HomeController::class, 'book_event'])->name('book-event');
+Route::get('/book-event', [BookingEventController::class, 'book_event'])->name('book-event');
+Route::post('/book-event', [BookingEventController::class, 'book_event_submit'])->name('book-event-submit');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin-dashboard');
@@ -57,6 +59,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/alumni-request', [UserDetailsController::class, 'alumni_request'])->name('admin-alumni-request');
     Route::post('/admin/alumni-approved/{id}', [UserDetailsController::class, 'alumni_approved'])->name('admin-alumni-approved');
     Route::post('/admin/alumni-reject/{id}', [UserDetailsController::class, 'alumni_reject'])->name('admin-alumni-reject');
+
+    //BOOK EVENT 
+    Route::get('/admin/book', [BookingEventController::class, 'index'])->name('admin-book');
+    Route::post('/admin/add-book', [BookingEventController::class, 'add_book'])->name('add-book');
+    Route::post('/admin/edit-book', [BookingEventController::class, 'edit_book'])->name('edit-book');
+    Route::post('/admin/update-book', [BookingEventController::class, 'update_book'])->name('update-book');
+    Route::post('/admin/delete-book/{id}', [BookingEventController::class, 'destroy_book'])->name('delete-book');
+
+    //BOOK EVENT REQUEST
+    Route::get('/admin/book-request', [BookingEventController::class, 'book_request'])->name('admin-book-request');
+    Route::post('/admin/book-approved/{id}', [BookingEventController::class, 'book_approved'])->name('admin-book-approved');
+    Route::post('/admin/book-reject/{id}', [BookingEventController::class, 'book_reject'])->name('admin-book-reject');
 
     //ANNOUNCEMENTS
     Route::get('/admin/announcement', [AnnouncementController::class, 'index'])->name('admin-announcement');
