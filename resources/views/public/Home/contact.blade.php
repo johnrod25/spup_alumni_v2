@@ -57,7 +57,7 @@
                             required>
                     </div>
                     <div class="form-group mt-3">
-                        <textarea placeholder="Message" class="form-control" name="message" rows="5" required></textarea>
+                        <textarea placeholder="Message" class="form-control" name="messagee" rows="5" required></textarea>
                     </div>
                     {{-- <div class="my-3">
                         <div class="loading">Loading</div>

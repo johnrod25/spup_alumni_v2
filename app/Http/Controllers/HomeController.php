@@ -142,8 +142,8 @@ class HomeController extends Controller
     public function send_email(ContactRequest $request){
         $data = $request->validated();
         Mail::send('public.email.contact', $data, function ($message) use ($data) {
-            $message->to('spup.tuguegarao2024@gmail.com')
-                    ->subject('Contact Form Submission');
+            $message->to(env('ADMIN_EMAIL'))
+                    ->subject($data['subject']);
         });
 
         // Send confirmation email to the contact
