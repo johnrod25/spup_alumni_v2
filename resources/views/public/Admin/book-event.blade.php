@@ -81,57 +81,139 @@
                 <form class="container-fluid needs-validation px-3" id="form-sched-edit" novalidate>
                     <!-- First Row -->
                     <div class="row container-fluid d-flex align-items-center justify-content-center">
-                        <div class="col-md-12 form-group">
-                            <label>Full Name</label>
+                        <div class="col-md-12 form-group mb-3">
+                            <label>Name (Surname, First Name MI.)</label>
                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="id" id="edit_id">
-                            <input type="text" class="form-control" name="fullname" id="edit_fullname"
-                                placeholder="Enter Full Name" required>
+                            <input type="hidden" name="user_id" id="edit_id">
+                            <input type="text" name="fullname" id="edit_fullname"
+                                class="form-control  @error('fullname') is-invalid @enderror"
+                                placeholder="Enter Full Name" value="{{ old('fullname') }}" required>
+                            @error('fullname')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label>Email</label>
-                            <input type="text" class="form-control" name="email" id="edit_email"
-                                placeholder="Enter Email" required>
+                        <div class="col-md-6 form-group mb-3">
+                            <label>Email Address</label>
+                            <input type="text" name="email" id="edit_email"
+                                class="form-control @error('email') is-invalid @enderror"
+                                placeholder="Enter Email Address" value="{{ old('email') }}" required>
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6 form-group mb-3">
                             <label>Contact Number</label>
-                            <input type="text" class="form-control" name="contact_number" id="edit_contact_number"
-                                placeholder="Enter Contact Number" required>
+                            <input type="text" name="contact_number" id="edit_contact_number"
+                                class="form-control @error('contact_number') is-invalid @enderror"
+                                placeholder="Enter Contact Number" value="{{ old('contact_number') }}" required>
+                            @error('contact_number')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6 form-group mb-3">
                             <label>Graduation Batch</label>
-                            <input type="text" class="form-control" name="graduation_batch"
-                                id="edit_graduation_batch" placeholder="Enter Graduation Batch" required>
+                            <input type="text" name="graduation_batch" id="edit_graduation_batch"
+                                class="form-control @error('graduation_batch') is-invalid @enderror"
+                                placeholder="Enter Graduation Batch" value="{{ old('graduation_batch') }}" required>
+                            @error('graduation_batch')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6 form-group mb-3">
                             <label>College/Institute/Faculty/Company</label>
-                            <input type="text" class="form-control" name="company" id="edit_company"
-                                placeholder="Enter Company" required>
+                            <input type="text" name="company" id="edit_company"
+                                class="form-control @error('company') is-invalid @enderror"
+                                placeholder="Enter College/Institute/Faculty/Company" value="{{ old('company') }}"
+                                required>
+                            @error('company')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6 form-group mb-3">
                             <label>Type of Event</label>
-                            <input type="text" class="form-control" name="event" id="edit_event"
-                                placeholder="Enter Home Address" required>
+                            <select name="event" id="edit_event"
+                                class="form-select form-control @error('event') is-invalid @enderror" required>
+                                <option value="">Select a type of event</option>
+                                <option value="Virtual/Online Event"
+                                    @if (old('event') == 'Virtual/Online Event') {{ 'selected' }} @endif>
+                                    Virtual/Online Event</option>
+                                <option value="Grand Alumni Homecoming"
+                                    @if (old('event') == 'Grand Alumni Homecoming') {{ 'selected' }} @endif>Grand Alumni
+                                    Homecoming</option>
+                                <option value="Alumni Batch Homecoming"
+                                    @if (old('event') == 'Alumni Batch Homecoming') {{ 'selected' }} @endif>Alumni Batch
+                                    Homecoming</option>
+                                <option value="Awarding Ceremony / Testimonal Dinner"
+                                    @if (old('event') == 'Awarding Ceremony / Testimonal Dinner') {{ 'selected' }} @endif>Awarding Ceremony /
+                                    Testimonal Dinner</option>
+                                <option value="Board Meeting"
+                                    @if (old('event') == 'Board Meeting') {{ 'selected' }} @endif>Board Meeting
+                                </option>
+                                <option value="Trade Fair / Product Launch"
+                                    @if (old('event') == 'Trade Fair / Product Launch') {{ 'selected' }} @endif>Trade Fair / Product
+                                    Launch</option>
+                                <option value="Training Seminar / Conference"
+                                    @if (old('event') == 'Training Seminar / Conference') {{ 'selected' }} @endif>Training Seminar /
+                                    Conference</option>
+                                <option value="Other" @if (old('event') == 'Other') {{ 'selected' }} @endif>
+                                    Other (please specify in message)</option>
+                            </select>
+
+                            @error('event')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6 form-group mb-3">
                             <label>Target Venue</label>
-                            <input type="text" class="form-control" name="venue" id="edit_venue"
-                                placeholder="Enter Venue" required>
+                            <select name="venue" id="edit_venue"
+                                class="form-select form-control @error('venue') is-invalid @enderror" required>
+                                <option value="">Select a target venue</option>
+                                <option value="Zoom" @if (old('venue') == 'Zoom') {{ 'selected' }} @endif>
+                                    Zoom(For
+                                    Virtual Events)</option>
+                                <option value="MM Hall" @if (old('venue') == 'MM Hall') {{ 'selected' }} @endif>
+                                    MM Hall
+                                </option>
+                                <option value="Global Center"
+                                    @if (old('venue') == 'Global Center') {{ 'selected' }} @endif>Global
+                                    Center</option>
+                                <option value="Student Center"
+                                    @if (old('venue') == 'Student Center') {{ 'selected' }} @endif>
+                                    Student Center</option>
+                                <option value="BEU Gym"
+                                    @if (old('venue') == 'BEU Gym') {{ 'selected' }} @endif>BEU Gym
+                                </option>
+                            </select>
+                            @error('venue')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6 form-group mb-3">
                             <label>From: (Target Date)</label>
-                            <input type="date" class="form-control" name="from_date" id="edit_from_date"
-                                placeholder="Enter Target Date" required>
+                            <input type="date" name="from_date" id="edit_from_date"
+                                class="form-control @error('from_date') is-invalid @enderror"
+                                value="{{ old('from_date') }}" required>
+                            @error('from_date')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6 form-group mb-3">
                             <label>To: (Target Date)</label>
-                            <input type="date" class="form-control" name="to_date" id="edit_to_date"
-                                placeholder="Enter Target Date" required>
+                            <input type="date" name="to_date" id="edit_to_date"
+                                class="form-control @error('to_date') is-invalid @enderror"
+                                value="{{ old('to_date') }}" required>
+                            @error('to_date')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="col-md-12 form-group">
+                        <div class="col-md-12 form-group mb-3">
                             <label>Message</label>
                             <textarea name="message" id="edit_message" cols="10" rows="5"
-                                class="form-control" placeholder="Enter Message Here..."></textarea>
+                                class="form-control @error('message') is-invalid @enderror" placeholder="Enter Message Here..."
+                                value="{{ old('message') }}" required></textarea>
+                            @error('message')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -190,26 +272,18 @@
         let formData = new FormData();
         formData.append('_token', $('#token').val());
         formData.append('id', edit_id);
-        formData.append('lastname', $("#edit_lastname").val());
-        formData.append('firstname', $("#edit_firstname").val());
-        formData.append('middlename', $("#edit_middlename").val());
-        formData.append('student_number', $("#edit_student_number").val());
+        formData.append('fullname', $("#edit_fullname").val());
         formData.append('email', $("#edit_email").val());
-        formData.append('phone_number', $("#edit_phone_number").val());
-        formData.append('home_address', $("#edit_home_address").val());
-        formData.append('birthdate', $("#edit_birthdate").val());
-        formData.append('degree', $("#edit_degree").val());
-        formData.append('batch', $("#edit_batch").val());
-        formData.append('involve_purpose', $("#edit_involve_purpose").val());
-        formData.append('year_graduated', $("#edit_year_graduated").val());
-        formData.append('company_name', $("#edit_company_name").val());
-        formData.append('specialization', $("#edit_specialization").val());
-        formData.append('occupation', $("#edit_occupation").val());
-        formData.append('work_status', $("#edit_work_status").val());
-        formData.append('before_employed', $("#edit_before_employed").val());
-
+        formData.append('contact_number', $("#edit_contact_number").val());
+        formData.append('graduation_batch', $("#edit_graduation_batch").val());
+        formData.append('company', $("#edit_company").val());
+        formData.append('event', $("#edit_event").val());
+        formData.append('venue', $("#edit_venue").val());
+        formData.append('from_date', $("#edit_from_date").val());
+        formData.append('to_date', $("#edit_to_date").val());
+        formData.append('message', $("#edit_message").val());
         $.ajax({
-            url: "{{ route('update-alumni') }}",
+            url: "{{ route('update-book') }}",
             type: "post",
             dataType: "json",
             data: formData,

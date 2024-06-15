@@ -55,6 +55,35 @@ class BookingEventController extends Controller
         // return redirect('/');
     }
 
+    public function update_book(Request $request){
+        $validated = $request->validate([
+            'fullname' => 'required',
+            'email' => 'required',
+            'contact_number' => 'required',
+            'graduation_batch' => 'required',
+            'company' => 'required',
+            'event' => 'required',
+            'venue' => 'required',
+            'from_date' => 'required',
+            'to_date' => 'required',
+            'message' => 'required',
+        ]);
+
+        $data = BookingEvent::where('id',$request->id)->first();
+            $data->fullname = $request->fullname;
+            $data->email = $request->email;
+            $data->contact_number = $request->contact_number;
+            $data->graduation_batch = $request->graduation_batch;
+            $data->company = $request->company;
+            $data->event = $request->event;
+            $data->venue = $request->venue;
+            $data->from_date = $request->from_date;
+            $data->to_date = $request->to_date;
+            $data->message = $request->message;
+            $data->save();
+        return ['response' => 'success', 'message' => 'Updated Successfully.'];
+        // return redirect('/');
+    }
 
     public function destroy_book($id)
     {

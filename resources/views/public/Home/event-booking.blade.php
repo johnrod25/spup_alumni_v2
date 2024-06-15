@@ -67,7 +67,14 @@
                         Virtual/Online Event</option>
                     <option value="Grand Alumni Homecoming"
                         @if (old('event') == 'Grand Alumni Homecoming') {{ 'selected' }} @endif>Grand Alumni Homecoming</option>
+                    <option value="Alumni Batch Homecoming" @if (old('event') == 'Alumni Batch Homecoming') {{ 'selected' }} @endif>Alumni Batch Homecoming</option>
+                    <option value="Awarding Ceremony / Testimonal Dinner" @if (old('event') == 'Awarding Ceremony / Testimonal Dinner') {{ 'selected' }} @endif>Awarding Ceremony / Testimonal Dinner</option>
+                    <option value="Board Meeting" @if (old('event') == 'Board Meeting') {{ 'selected' }} @endif>Board Meeting</option>
+                    <option value="Trade Fair / Product Launch" @if (old('event') == 'Trade Fair / Product Launch') {{ 'selected' }} @endif>Trade Fair / Product Launch</option>
+                    <option value="Training Seminar / Conference" @if (old('event') == 'Training Seminar / Conference') {{ 'selected' }} @endif>Training Seminar / Conference</option>
+                    <option value="Other" @if (old('event') == 'Other') {{ 'selected' }} @endif>Other (please specify in message)</option>
                 </select>
+
                 @error('event')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
