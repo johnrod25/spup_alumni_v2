@@ -9,7 +9,9 @@ use App\Models\News;
 use App\Models\User;
 use App\Models\User_Details;
 use Illuminate\Http\Request;
-
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ContactRequest;
 class HomeController extends Controller
 {
     //
@@ -135,6 +137,26 @@ class HomeController extends Controller
 
         // return back()->with(['success_message' => 'Registered Successfully.']);
         return redirect('/');
+    }
+
+    public function send_email(ContactRequest $request){
+        $data = $request->validated();
+        Mail::send('public.email.contact', $data, function ($message) use ($data) {
+            $message->to('spup.tuguegarao2024@gmail.com')
+                    ->subject('Contact Form Submission');
+        });
+
+        // Send confirmation email to the contact
+        Mail::send('public.email.contact_confirmation', $data, function ($message) use ($data) {
+            $message->to($data['email'])
+                    ->subject('Thank you for contacting us');
+        });
+
+
+        return redirect('/#contact')->with(['success' => 'Thank you for contacting us, '.$data['name'].'!']);
+    //     Mail::to('johnrod.a.malsi@gmail.com')->send(new SendMail([
+    //         'name' => 'Johnrod',
+    //    ]));
     }
 
     

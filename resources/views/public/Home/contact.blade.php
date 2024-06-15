@@ -36,29 +36,35 @@
             </div>
 
             <div class="col-lg-6">
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form"
+                <form action="{{ route('send-mail') }}" method="post" class="mt-3"
                     data-aos="fade-up">
+                    @csrf
+                    @if (Session::has('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
                     <div class="form-group">
-                        <input placeholder="Your Name" type="text" name="name" class="form-control"
-                            id="name" required>
+                        <input placeholder="Your Name" type="text" name="name" class="form-control" id="name"
+                            required>
                     </div>
                     <div class="form-group mt-3">
                         <input placeholder="Your Email" type="email" class="form-control" name="email"
                             id="email" required>
                     </div>
                     <div class="form-group mt-3">
-                        <input placeholder="Subject" type="text" class="form-control" name="subject"
-                            id="subject" required>
+                        <input placeholder="Subject" type="text" class="form-control" name="subject" id="subject"
+                            required>
                     </div>
                     <div class="form-group mt-3">
                         <textarea placeholder="Message" class="form-control" name="message" rows="5" required></textarea>
                     </div>
-                    <div class="my-3">
+                    {{-- <div class="my-3">
                         <div class="loading">Loading</div>
                         <div class="error-message"></div>
                         <div class="sent-message">Your message has been sent. Thank you!</div>
-                    </div>
-                    <div class="text-center"><button type="submit" class="btn">Send Message</button></div>
+                    </div> --}}
+                    <div class="text-center"><button type="submit" class="btn btn-success mt-3">Send Message</button></div>
                 </form>
             </div>
 

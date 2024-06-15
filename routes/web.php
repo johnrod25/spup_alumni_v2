@@ -26,6 +26,7 @@ Route::get('/login', function () {
 })->middleware('guest');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/send-email', [HomeController::class, 'send_email'])->name('send-mail');
 // Route::post('/Change-password', [LoginController::class, 'changePassword'])->name('change_password');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
