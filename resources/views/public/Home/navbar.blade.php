@@ -32,7 +32,7 @@
                             Events
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Upcoming Events</a></li>
+                            {{-- <li><a class="dropdown-item" href="#">Upcoming Events</a></li> --}}
                             <li><a class="dropdown-item" href="{{route('book-event')}}">Book an event</a></li>
                             {{-- <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
                         </ul>

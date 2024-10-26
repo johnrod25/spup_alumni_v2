@@ -3,43 +3,48 @@
 <head>
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
+
 <form class="container-fluid w-75 p-5" action="{{ route('register-form-submit') }}" method="post">
     @csrf
     @if (Session::has('success_message'))
-        <div class="alert alert-success">
+        <div class="alert alert-success" id="success-alert">
             {{ Session::get('success_message') }}
         </div>
     @endif
+
     <div class="row container-fluid d-flex align-items-center justify-content-center">
         <h5 class="text-bold">PERSONAL INFORMATION</h5>
-        <div class="col-md-4 form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname"
-                placeholder="Enter Last Name" value="{{ old('lastname') }}">
-            @error('lastname')
+        <div class="col-md-8 form-group">
+            <label>Name</label>
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                placeholder="Enter Full Name" value="{{ old('name') }}">
+            @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-md-4 form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname"
-                placeholder="Enter First Name" value="{{ old('firstname') }}">
-            @error('firstname')
+            <label>Current Position</label>
+            <input type="text" class="form-control @error('current_position') is-invalid @enderror"
+                name="current_position" placeholder="Enter Current Position" value="{{ old('current_position') }}">
+            @error('current_position')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-md-4 form-group">
-            <label>Middle Name</label>
-            <input type="text" class="form-control @error('middlename') is-invalid @enderror" name="middlename"
-                placeholder="Enter Middle Name" value="{{ old('middlename') }}">
-            @error('middlename')
+            <label>Telephone Number</label>
+            <input type="text" class="form-control @error('telephone_number') is-invalid @enderror"
+                name="telephone_number" placeholder="Enter Telephone Number" value="{{ old('telephone_number') }}">
+            @error('telephone_number')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-md-4 form-group">
-            <label>Student Number(Optional)</label>
-            <input type="text" class="form-control" name="student_number" placeholder="Enter Student Number"
-                value="{{ old('student_number') }}">
+            <label>Mobile Number</label>
+            <input type="text" class="form-control @error('mobile_number') is-invalid @enderror" name="mobile_number"
+                placeholder="Enter Mobile Number" value="{{ old('mobile_number') }}">
+            @error('mobile_number')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-4 form-group">
             <label>Email</label>
@@ -49,269 +54,776 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        {{-- <div class="col-md-4 form-group">
-            <label>Password</label>
-            <input type="password" class="form-control @error('firstname') is-invalid @enderror" name="password" placeholder="Enter Password">
-        </div> --}}
-
         <div class="col-md-4 form-group">
-            <label>Phone Number</label>
-            <input type="number" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                placeholder="Enter Phone Number" value="{{ old('phone_number') }}">
-            @error('phone_number')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="col-md-8 form-group">
-            <label>Home Address</label>
-            <input type="text" class="form-control @error('home_address') is-invalid @enderror" name="home_address"
-                placeholder="Enter Home Address" value="{{ old('home_address') }}">
-            @error('home_address')
+            <label>Sex</label>
+            <select name="gender" class="form-select @error('gender') is-invalid @enderror">
+                <option value=""></option>
+                <option value="Male" @if (old('gender') == 'Male') selected @endif>Male</option>
+                <option value="Female" @if (old('gender') == 'Female') selected @endif>Female</option>
+            </select>
+            @error('gender')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-md-4 form-group">
-            <label>Birth Date</label>
-            <input type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate"
-                placeholder="Enter Birth Date" value="{{ old('birthdate') }}">
-            @error('birthdate')
+            <label>Age</label>
+            <select name="age" class="form-select @error('age') is-invalid @enderror">
+                <option value=""></option>
+                <option value="21-25" @if (old('age') == '21-25') selected @endif>21-25 yrs</option>
+                <option value="26-30" @if (old('age') == '26-30') selected @endif>26-30 yrs</option>
+                <option value="31-35" @if (old('age') == '31-35') selected @endif>31-35 yrs</option>
+                <option value="36-40" @if (old('age') == '36-40') selected @endif>36-40 yrs</option>
+                <option value="41-45" @if (old('age') == '41-45') selected @endif>41-45 yrs</option>
+                <option value="46+" @if (old('age') == '46+') selected @endif>46 yrs and above</option>
+            </select>
+            @error('age')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-md-4 form-group">
+            <label>Civil Status</label>
+            <select name="civil_status" class="form-select @error('civil_status') is-invalid @enderror">
+                <option value=""></option>
+                <option value="Single" @if (old('civil_status') == 'Single') selected @endif>Single</option>
+                <option value="Married" @if (old('civil_status') == 'Married') selected @endif>Married</option>
+                <option value="Separated" @if (old('civil_status') == 'Separated') selected @endif>Separated</option>
+                <option value="Widow/Widower" @if (old('civil_status') == 'Widow/Widower') selected @endif>Widow/Widower
+                </option>
+                <option value="Single Parent" @if (old('civil_status') == 'Single Parent') selected @endif>Single Parent
+                </option>
+            </select>
+            @error('civil_status')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
     </div>
+
     <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">
-        <h5 class="text-bold">ACADEMIC PROGRAM/ DEGREE IN ST.PAUL UNIVERSITY PHILIPPINES</h5>
+        <h5 class="text-bold">EDUCATIONAL BACKGROUND</h5>
         <div class="col-md-6 form-group">
             <label>Program(s)/Degree(s) Completed in St. Paul University</label>
-            <select name="degree" placeholder="Enter Program/ Degree"
-                class="form-select @error('degree') is-invalid @enderror" value="{{ old('degree') }}">
+            <select name="degree" class="form-select @error('degree') is-invalid @enderror">
                 <option value=""></option>
-                <option value="Bachelor of Arts in English Language Studies">Bachelor of Arts in English Language
-                    Studies</option>
-                <option value="Bachelor of Science in Psychology">Bachelor of Science in Psychology</option>
-                <option value="Bachelor of Science in Biology">Bachelor of Science in Biology</option>
-                <option value="Bachelor of Science in Social Work">Bachelor of Science in Social Work</option>
-                <option value="Bachelor of Science in Public Administration">Bachelor of Science in Public
-                    Administration</option>
-                <option value="Bachelor of Science in Biology Major in MicroBiology">Bachelor of Science in Biology
-                    Major in MicroBiology</option>
-                <option value="Bachelor of Secondary Education">Bachelor of Secondary Education</option>
-                <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
-                <option value="Bachelor of Physical Education">Bachelor of Physical Education</option>
-                <option value="Bachelor of Science in Accountancy">Bachelor of Science in Accountancy</option>
-                <option value="Bachelor of Science in Entrepreneurship">Bachelor of Science in Entrepreneurship</option>
-                <option
-                    value="Bachelor of Science in Business Administration major in: Marketing Management, Financial Management and Operations Management">
-                    Bachelor of Science in Business Administration major in: Marketing Management, Financial Management
-                    and Operations Management</option>
-                <option value="Bachelor of Science in Management Accounting">Bachelor of Science in Management
-                    Accounting</option>
-                <option value="Bachelor of Science in Hospitality Management">Bachelor of Science in Hospitality
-                    Management</option>
-                <option value="Bachelor of Science in Tourism Management">Bachelor of Science in Tourism Management
-                </option>
-                <option value="Bachelor of Science in Product Design and Marketing Innovation">Bachelor of Science in
-                    Product Design and Marketing Innovation</option>
-                <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information
-                    Technology</option>
-                <option value="Bachelor of Library and Information Science">Bachelor of Library and Information Science
-                </option>
-                <option value="Bachelor of Science in Civil Engineering">Bachelor of Science in Civil Engineering
-                </option>
-                <option value="Bachelor of Science in Environmental and Sanitary Engineering">Bachelor of Science in
-                    Environmental and Sanitary Engineering</option>
-                <option value="Bachelor of Science in Computer Engineering">Bachelor of Science in Computer Engineering
-                </option>
-                <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing</option>
-                <option value="Bachelor of Science in Pharmacy">Bachelor of Science in Pharmacy</option>
-                <option value="Bachelor of Science in Medical Technology">Bachelor of Science in Medical Technology
-                </option>
-                <option value="Bachelor of Science in Physical Therapy">Bachelor of Science in Physical Therapy</option>
-                <option value="Bachelor of Science in Radiologic Technology">Bachelor of Science in Radiologic
-                    Technology</option>
-                <option value="Bachelor of Science in Midwifery">Bachelor of Science in Midwifery</option>
-                <option value="Doctor of Medicine">Doctor of Medicine</option>
+                @foreach($degrees as $degree)
+                    <option value="{{ $degree->name }}" @if (old('degree') == $degree->name) selected @endif>
+                        {{ $degree->name }}
+                    </option>
+                @endforeach
             </select>
             @error('degree')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            {{-- <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="degree" placeholder="Enter Program/ Degree"> --}}
         </div>
         <div class="col-md-6 form-group">
-            <label>What Batch(es) do you belong?</label>
-            {{-- <select name="batch" placeholder="Select batch" class="form-select">
-                <option value=""></option>
-                <option value="HS BATCH78">HS BATCH78</option>
-                <option value="BSN BATCH90">BSN BATCH90</option>
-                <option value="MBA BATCH2009">MBA BATCH2009</option>
-            </select> --}}
-            <input type="text" class="form-control @error('batch') is-invalid @enderror" name="batch"
-                placeholder="EG. HS BATCH78; BSN BATCH90; MBA BATCH2009,ETC." value="{{ old('batch') }}">
-            @error('batch')
+            <label>College or University</label>
+            <input type="text" class="form-control @error('college') is-invalid @enderror" name="college"
+                placeholder="Enter College or University" value="{{ old('college') }}">
+            @error('college')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="col-md-6 form-group">
-            <label>Please indicate how you would want to br involved in your Alma Mater</label>
-            <select name="involve_purpose"
-                placeholder="Please indicate how you would want to br involved in your Alma Mater"
-                class="form-select @error('involve_purpose') is-invalid @enderror"
-                value="{{ old('involve_purpose') }}">
-                <option value=""></option>
-                <option value="Consultant" @if (old('involve_purpose') == 'Consultant') {{ 'selected' }} @endif>Consultant</option>
-                <option value="Resource Speaker" @if (old('involve_purpose') == 'Resource Speaker') {{ 'selected' }} @endif>Resource Speaker</option>
-                <option value="Standing Committee Member" @if (old('involve_purpose') == 'Standing Committee Member') {{ 'selected' }} @endif>Standing Committee Member</option>
-                <option value="Advisory Committee Member" @if (old('involve_purpose') == 'Advisory Committee Member') {{ 'selected' }} @endif>Advisory Committee Member</option>
-                <option value="Part-time Faculty" @if (old('involve_purpose') == 'Part-time Faculty') {{ 'selected' }} @endif>Part-time Faculty</option>
-                <option value="Panel member in Theses/Dissertation Validation" @if (old('involve_purpose') == 'Panel member in Theses/Dissertation Validation') {{ 'selected' }} @endif>Panel member in Theses/Dissertation
-                    Validation</option>
-                <option value="Marketing Campaign" @if (old('involve_purpose') == 'Marketing Campaign') {{ 'selected' }} @endif>Marketing Campaign</option>
-                <option value="Mentoring Current Students" @if (old('involve_purpose') == 'Mentoring Current Students') {{ 'selected' }} @endif>Mentoring Current Students</option>
-                <option value="Supporting recent graduates as they start their career." @if (old('involve_purpose') == 'Supporting recent graduates as they start their career.') {{ 'selected' }} @endif>Supporting recent graduates as
-                    they start their career.</option>
-            </select>
-            @error('involve_purpose')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="col-md-6 form-group">
-            <label>Year Graduated/ Last Year Attended</label>
-            <input type="date" class="form-control @error('year_graduated') is-invalid @enderror"
-                name="year_graduated" placeholder="Enter Year Graduated/ Last Year Attended"
-                value="{{ old('year_graduated') }}">
+        <div class="col-md-4 form-group">
+            <label>Year Graduated</label>
+            <input type="text" class="form-control @error('year_graduated') is-invalid @enderror" name="year_graduated"
+                placeholder="Enter Year Graduated" value="{{ old('year_graduated') }}">
             @error('year_graduated')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">
-            <h5 class="text-bold">ABOUT YOUR WORK</h5>
-            <div class="col-md-4 form-group">
-                <label>Company Name/ Employer</label>
-                <input type="text" class="form-control @error('company_name') is-invalid @enderror"
-                    name="company_name" placeholder="Enter Company Name/ Employer"
-                    value="{{ old('company_name') }}">
-                @error('company_name')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="col-md-4 form-group">
-                <label>Specialization/ Expertise/ Industry</label>
-                <select name="specialization" class="form-select @error('specialization') is-invalid @enderror"
-                    id="specialization" value="{{ old('specialization') }}" onchange="showOtherInput()">
-                    <option value=""></option>
-                    <option value="Civil Engineering" @if (old('specialization') == 'Civil Engineering') {{ 'selected' }} @endif>Civil Engineering
-                    </option>
-                    <option value="Electrical Engineering" @if (old('specialization') == 'Electrical Engineering') {{ 'selected' }} @endif>Electrical Engineering
-                    </option>
-                    <option value="Computer Engineering" @if (old('specialization') == 'Computer Engineering') {{ 'selected' }} @endif>Computer Engineering
-                    </option>
-                    <option value="Software Engineering" @if (old('specialization') == 'Software Engineering') {{ 'selected' }} @endif>Software Engineering
-                    </option>
-                    <option value="Information Technology and Computer Science" @if (old('specialization') == 'Information Technology and Computer Science') {{ 'selected' }} @endif>Information Technology and Computer Science
-                    </option>
-                    <option value="Information Technology" @if (old('specialization') == 'Information Technology') {{ 'selected' }} @endif>Information Technology
-                    </option>
-                    <option value="Cybersecurity" @if (old('specialization') == 'Cybersecurity') {{ 'selected' }} @endif>Cybersecurity
-                    </option>
-                    <option value="Data Science" @if (old('specialization') == 'Data Science') {{ 'selected' }} @endif>Data Science
-                    </option>
-                    <option value="Information Systems" @if (old('specialization') == 'Information Systems') {{ 'selected' }} @endif>Information Systems
-                    </option>
-                    <option value="Network Administration" @if (old('specialization') == 'Network Administration') {{ 'selected' }} @endif>Network Administration
-                    </option>
-                    <option value="Software Development" @if (old('specialization') == 'Software Development') {{ 'selected' }} @endif>Software Development
-                    </option>
-                    <option value="Artificial Intelligence" @if (old('specialization') == 'Artificial Intelligence') {{ 'selected' }} @endif>Artificial Intelligence
-                    </option>
-                    <option value="Game Development" @if (old('specialization') == 'Game Development') {{ 'selected' }} @endif>Game Development
-                    </option>
-                    <option value="Web Development" @if (old('specialization') == 'Web Development') {{ 'selected' }} @endif>Web Development
-                    </option>
-                    <option value="Business Administration" @if (old('specialization') == 'Business Administration') {{ 'selected' }} @endif>Business Administration
-                    </option>
-                    <option value="Marketing" @if (old('specialization') == 'Marketing') {{ 'selected' }} @endif>Marketing
-                    </option>
-                    <option value="Finance" @if (old('specialization') == 'Finance') {{ 'selected' }} @endif>Finance
-                    </option>
-                    <option value="Accounting" @if (old('specialization') == 'Accounting') {{ 'selected' }} @endif>Accounting
-                    </option>
-                    <option value="Human Resource Management" @if (old('specialization') == 'Human Resource Management') {{ 'selected' }} @endif>Human Resource Management
-                    </option>
-                    <option value="Entrepreneurship" @if (old('specialization') == 'Entrepreneurship') {{ 'selected' }} @endif>Entrepreneurship
-                    </option>
-                    <option value="Nursing" @if (old('specialization') == 'Nursing') {{ 'selected' }} @endif>Nursing
-                    </option>
-                    <option value="Pharmacy" @if (old('specialization') == 'Pharmacy') {{ 'selected' }} @endif>Pharmacy
-                    </option>
-                    <option value="Radiologic Technology" @if (old('specialization') == 'Radiologic Technology') {{ 'selected' }} @endif>Radiologic Technology
-                    </option>
-                    <option value="Psychology" @if (old('specialization') == 'Psychology') {{ 'selected' }} @endif>Psychology
-                    </option>
-                    <option value="Political Science" @if (old('specialization') == 'Political Science') {{ 'selected' }} @endif>Political Science
-                    </option>
-                    <option value="Public Administration" @if (old('specialization') == 'Public Administration') {{ 'selected' }} @endif>Public Administration
-                    </option>
-                    <option value="others">Other (please specify)</option>
-                </select>
-                <div id="otherInput" style="display: none;margin-top: 10px;">
-                    <input type="text" id="other_specialization" class="form-control" name="specialization1"
-                        placeholder="Enter Speacialization..">
+        <div class="col-md-4 form-group">
+            <label>Honor(s) or Award(s) Received</label>
+            <input type="text" class="form-control @error('awards') is-invalid @enderror" name="awards"
+                placeholder="Enter Honor(s) or Award(s) Received" value="{{ old('awards') }}">
+            @error('awards')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <!-- Professional Examinations Passed -->
+        <h5 class="text-bold">Professional Examinations Passed</h5>
+        <div id="exams-wrapper" class="container-fluid">
+            <div class="row exam-row">
+                <div class="col-md-4 form-group">
+                    <label>Name of Examination</label>
+                    <input type="text" class="form-control" name="exam_name[]" placeholder="Enter Examination Name">
                 </div>
-                @error('specialization')
+                <div class="col-md-4 form-group">
+                    <label>Date Taken</label>
+                    <input type="date" class="form-control" name="exam_date[]">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Rating</label>
+                    <input type="text" class="form-control" name="exam_rating[]" placeholder="Enter Rating">
+                </div>
+            </div>
+        </div>
+        <div class="row container-fluid mt-2">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-success" id="add-exam-btn">Add Another Exam</button>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('add-exam-btn').addEventListener('click', function () {
+                let examsWrapper = document.getElementById('exams-wrapper');
+                let examRow = document.createElement('div');
+                examRow.classList.add('row', 'exam-row');
+                examRow.innerHTML = `
+            <div class="col-md-4 form-group">
+                <label>Name of Examination</label>
+                <input type="text" class="form-control" name="exam_name[]" placeholder="Enter Examination Name">
+            </div>
+            <div class="col-md-4 form-group">
+                <label>Date Taken</label>
+                <input type="date" class="form-control" name="exam_date[]">
+            </div>
+            <div class="col-md-4 form-group">
+                <label>Rating</label>
+                <input type="text" class="form-control" name="exam_rating[]" placeholder="Enter Rating">
+            </div>
+        `;
+                examsWrapper.appendChild(examRow);
+            });
+        </script>
+
+
+        <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">
+            <h5 class="text-bold">TRAINING(S) AND ADVANCED STUDIES</h5>
+            <div class="col-md-12 form-group">
+                <label>Title of Training or Advanced Study</label>
+                <textarea class="form-control @error('training') is-invalid @enderror" name="training"
+                    placeholder="Enter Title of Training or Advanced Study">{{ old('training') }}</textarea>
+                @error('training')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="col-md-12 form-group">
+            <label>Are you presently employed?</label>
+            <select name="employed" class="form-select @error('employed') is-invalid @enderror"
+                onchange="toggleEmploymentDetails(this.value)">
+                <option value=""></option>
+                <option value="Yes" @if (old('employed') == 'Yes') selected @endif>Yes</option>
+                <option value="No" @if (old('employed') == 'No') selected @endif>No</option>
+                <option value="Never Employed" @if (old('employed') == 'Never Employed') selected @endif>Never
+                    Employed</option>
+            </select>
+            @error('employed')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div id="employmentDetails" class="row container-fluid mt-3" style="display: none;">
+            <h5 class="text-bold">EMPLOYMENT DATA</h5>
+            <div class="col-md-6 form-group">
+                <label>Name of Organization</label>
+                <input type="text" class="form-control @error('organization') is-invalid @enderror"
+                    name="organization" placeholder="Enter Name of Organization" value="{{ old('organization') }}">
+                @error('organization')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Address</label>
+                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address"
+                    placeholder="Enter Address" value="{{ old('address') }}">
+                @error('address')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-md-4 form-group">
-                <label>Designation/ Occupation</label>
-                <input type="text" class="form-control @error('occupation') is-invalid @enderror"
-                    name="occupation" placeholder="Enter Occupation" value="{{ old('occupation') }}">
-                @error('occupation')
+                <label>Place of Work</label>
+                <select name="place_of_work" class="form-select @error('place_of_work') is-invalid @enderror">
+                    <option value=""></option>
+                    <option value="Local" @if (old('place_of_work') == 'Local') selected @endif>Local</option>
+                    <option value="Abroad" @if (old('place_of_work') == 'Abroad') selected @endif>Abroad</option>
+                </select>
+                @error('place_of_work')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-md-6 form-group">
-                <label>Work Engagement Status</label>
-                <select name="work_status" id="work_status"
-                    class="form-select @error('work_status') is-invalid @enderror" value="{{ old('work_status') }}">
+            <div class="col-md-4 form-group">
+                <label>Type of Organization</label>
+                <select name="organization_type"
+                    class="form-select @error('organization_type') is-invalid @enderror">
                     <option value=""></option>
-                    <option value="Employer" @if (old('work_status') == 'Employer') {{ 'selected' }} @endif>Employer/ Company or Business Owner</option>
-                    <option value="Full time" @if (old('work_status') == 'Full time') {{ 'selected' }} @endif>Full Time Employee</option>
-                    <option value="Part time" @if (old('work_status') == 'Part time') {{ 'selected' }} @endif>Part Time Employee</option>
-                    <option value="self-employed" @if (old('work_status') == 'self-employed') {{ 'selected' }} @endif>Self Employed</option>
-                    <option value="freelance" @if (old('work_status') == 'freelance') {{ 'selected' }} @endif>Freelance Consultant/ Service Provider</option>
-                    <option value="retiree" @if (old('work_status') == 'retiree') {{ 'selected' }} @endif>Retiree</option>
-                    {{-- <option value="others">Others</option> --}}
+                    <option value="Government" @if (old('organization_type') == 'Government') selected @endif>
+                        Government</option>
+                    <option value="Public Enterprise" @if (old('organization_type') == 'Public Enterprise') selected
+                    @endif>Public Enterprise</option>
+                    <option value="Educational Institution" @if (old('organization_type') == 'Educational Institution') selected @endif>Educational Institution</option>
+                    <option value="Private Enterprise" @if (old('organization_type') == 'Private Enterprise') selected
+                    @endif>Private Enterprise</option>
+                    <option value="Non-Profit Organization/NGO" @if (old('organization_type') == 'Non-Profit Organization/NGO') selected @endif>Non-Profit Organization/NGO</option>
+                    <option value="International Organization" @if (old('organization_type') == 'International Organization') selected @endif>International Organization</option>
+                    <option value="Self-employed" @if (old('organization_type') == 'Self-employed') selected @endif>
+                        Self-employed</option>
+                    {{-- <option value="Others" @if (old('organization_type')=='Others' ) selected @endif>Others
+                        (please specify)</option> --}}
                 </select>
-                @error('work_status')
+                @error('organization_type')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-md-6 form-group">
-                <label>How long did it take before you were employed after graduation?</label>
-                <select name="before_employed" id="before_employed"
-                    class="form-select @error('before_employed') is-invalid @enderror"
-                    value="{{ old('before_employed') }}">
+            <div class="col-md-4 form-group">
+                <label>Monthly Gross Income</label>
+                <select name="monthly_income" class="form-select @error('monthly_income') is-invalid @enderror">
                     <option value=""></option>
-                    <option value="1-3" @if (old('before_employed') == '1-3') {{ 'selected' }} @endif>One to three (1-3) months</option>
-                    <option value="4-6" @if (old('before_employed') == '4-6') {{ 'selected' }} @endif>Four to six (4-6) months</option>
-                    <option value="7-11" @if (old('before_employed') == '7-11') {{ 'selected' }} @endif>Seven to eleven (7-11) months</option>
-                    <option value="1 year" @if (old('before_employed') == '1 year') {{ 'selected' }} @endif>One year</option>
-                    <option value="1-2 years" @if (old('before_employed') == '1-2 years') {{ 'selected' }} @endif>One to two years</option>
-                    <option value="2 years or more" @if (old('before_employed') == '2 years or more') {{ 'selected' }} @endif>Two years or more</option>
-                    <option value="na" @if (old('before_employed') == 'na') {{ 'selected' }} @endif>N/A</option>
+                    <option value="Below 5000" @if (old('monthly_income') == 'Below 5000') selected @endif>Below
+                        P5000.00</option>
+                    <option value="5000-10000" @if (old('monthly_income') == '5000-10000') selected @endif>P5000.00 to
+                        less than P10000.00</option>
+                    <option value="10000-15000" @if (old('monthly_income') == '10000-15000') selected @endif>P10000.00
+                        to less than P15000.00</option>
+                    <option value="15000-20000" @if (old('monthly_income') == '15000-20000') selected @endif>P15000.00
+                        to less than P20000.00</option>
+                    <option value="20000-25000" @if (old('monthly_income') == '20000-25000') selected @endif>P20000.00
+                        to less than P25000.00</option>
+                    <option value="25000+" @if (old('monthly_income') == '25000+') selected @endif>P25000.00 and above
+                    </option>
                 </select>
-                @error('before_employed')
+                @error('monthly_income')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+            </div>
+            <h5 class="text-bold">Present Employment Status</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <label>Employment Status</label>
+                    <div>
+                        <label><input type="radio" name="employment_status" value="Regular"
+                                onclick="toggleSelfEmployedFields(false)"> Regular or Permanent</label>
+                        <label><input type="radio" name="employment_status" value="Contractual"
+                                onclick="toggleSelfEmployedFields(false)"> Contractual</label>
+                        <label><input type="radio" name="employment_status" value="Temporary"
+                                onclick="toggleSelfEmployedFields(false)"> Temporary</label>
+                        <label><input type="radio" name="employment_status" value="Self-employed"
+                                onclick="toggleSelfEmployedFields(true)"> Self-employed</label>
+                        <label><input type="radio" name="employment_status" value="Casual"
+                                onclick="toggleSelfEmployedFields(false)"> Casual</label>
+                    </div>
+                </div>
             </div>
 
+            <div id="occupation-fields" style="display: none;">
+                <div class="row container-fluid">
+                    <div class="col-md-6 form-group">
+                        <label>Present Occupation</label>
+                        <input type="text" class="form-control" name="occupation"
+                            placeholder="Enter Occupation">
+                    </div>
+                </div>
+            </div>
+
+            <div id="self-employed-fields" style="display: none;">
+
+                <h5 class="text-bold">If Self-employed</h5>
+                <div class="row container-fluid">
+                    <div class="col-md-12 form-group">
+                        <label>What skills acquired in college were you able to apply in your work?</label>
+                        <input type="text" class="form-control" name="self_employed_skills"
+                            placeholder="Skills acquired in college">
+                    </div>
+                </div>
+
+
+                <div class="row container-fluid">
+                    <div class="col-md-12 form-group">
+                        <label>What type of business are you engaged in?</label>
+                        <div class="form-check">
+                            <label><input type="checkbox" name="business_type[]" value="Grains business"> Grains
+                                business</label><br>
+                            <label><input type="checkbox" name="business_type[]" value="Real Estate business"> Real
+                                Estate business</label><br>
+                            <label><input type="checkbox" name="business_type[]" value="Farming">
+                                Farming</label><br>
+                            <label><input type="checkbox" name="business_type[]" value="Grocery/ Sari-sari store">
+                                Grocery/ Sari-sari store</label><br>
+                            <label><input type="checkbox" name="business_type[]" value="Food business"> Food
+                                business (eatery, restaurant, etc.)</label><br>
+                            <label><input type="checkbox" name="business_type[]" value="Animal raising"> Animal
+                                raising (poultry, piggery, etc.)</label><br>
+                            <label><input type="checkbox" name="business_type[]" value="Trade business"> Trade
+                                business (buy and sell)</label><br>
+                            <label><input type="checkbox" name="business_type[]"
+                                    value="Construction, design, programming"> Construction, design,
+                                programming</label><br>
+                            <label><input type="checkbox" name="business_type[]" value="Others"> Others (Please
+                                specify)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Toggle the display of self-employed-specific fields
+                function toggleSelfEmployedFields(show) {
+                    var selfEmployedFields = document.getElementById('self-employed-fields');
+                    var occupationFields = document.getElementById('occupation-fields');
+                    if (show) {
+                        selfEmployedFields.style.display = 'block';
+                        occupationFields.style.display = 'none';
+                    } else {
+                        occupationFields.style.display = 'block';
+                        selfEmployedFields.style.display = 'none';
+                    }
+                }
+            </script>
+
+            <!-- First Job After College -->
+            <h5 class="text-bold">First Job After College</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <label>Is this your first job after college?</label>
+                    <div>
+                        <label><input type="radio" name="first_job" value="Yes" onclick="toggleJobFields(false)">
+                            Yes</label>
+                        <label><input type="radio" name="first_job" value="No" onclick="toggleJobFields(true)">
+                            No</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="previous-job-fields" style="display: none;">
+
+                <div class="row container-fluid">
+                    <div class="col-md-6 form-group">
+                        <label>How many jobs have you had before your present job?</label>
+                        <input type="number" class="form-control" name="previous_jobs_count"
+                            placeholder="Number of previous jobs">
+                    </div>
+                </div>
+            </div>
+
+
+            <h5 class="text-bold">Job Level Position</h5>
+            <div class="row container-fluid">
+                <div class="col-md-6 form-group">
+                    <label>First Job</label>
+                    <div>
+                        <label><input type="radio" name="first_job_level" value="Rank or Clerical"> Rank or
+                            Clerical</label><br>
+                        <label><input type="radio" name="first_job_level"
+                                value="Professional, Technical, Supervisory"> Professional, Technical,
+                            Supervisory</label><br>
+                        <label><input type="radio" name="first_job_level" value="Managerial or Executive">
+                            Managerial or Executive</label><br>
+                        <label><input type="radio" name="first_job_level" value="Self-employed">
+                            Self-employed</label>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Current or Present Job</label>
+                    <div>
+                        <label><input type="radio" name="current_job_level" value="Rank or Clerical"> Rank or
+                            Clerical</label><br>
+                        <label><input type="radio" name="current_job_level"
+                                value="Professional, Technical, Supervisory"> Professional, Technical,
+                            Supervisory</label><br>
+                        <label><input type="radio" name="current_job_level" value="Managerial or Executive">
+                            Managerial or Executive</label><br>
+                        <label><input type="radio" name="current_job_level" value="Self-employed">
+                            Self-employed</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <h5 class="text-bold">Reasons for Accepting the Job</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <div class="form-check">
+                        <label><input type="checkbox" name="job_acceptance_reasons[]" value="salaries and benefits">
+                            Salaries and benefits</label><br>
+                        <label><input type="checkbox" name="job_acceptance_reasons[]" value="career challenge">
+                            Career challenge</label><br>
+                        <label><input type="checkbox" name="job_acceptance_reasons[]"
+                                value="related to special skills"> Related to special skills</label><br>
+                        <label><input type="checkbox" name="job_acceptance_reasons[]"
+                                value="proximity to residence"> Proximity to residence</label><br>
+                        <label><input type="checkbox" name="job_acceptance_reasons[]"
+                                value="desire to acquire job experience"> Desire to acquire job
+                            experience</label><br>
+                        <label><input type="checkbox" name="job_acceptance_reasons[]"
+                                value="my education/training is not adequate"> My education/training is not
+                            adequate</label><br>
+                        <label><input type="checkbox" name="job_acceptance_reasons[]"
+                                value="it was the first job offered to me"> It was the first job offered to
+                            me</label><br>
+                        <label><input type="checkbox" name="job_acceptance_reasons[]"
+                                value="I have not passed the board/professional exam required for the job"> I have
+                            not passed the board/professional exam required for the job</label><br>
+                        <label><input type="checkbox" name="job_acceptance_reasons[]"
+                                value="no available job opening in line with my course"> No available job opening in
+                            line with my course</label><br>
+                        <label>Other reasons (Please specify)</label><br>
+                            <input type="text" class="form-control" name="job_acceptance_reasons_other"
+                            placeholder="Specify if Other">
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+                function toggleJobFields(show) {
+                    var previousJobFields = document.getElementById('previous-job-fields');
+                    if (show) {
+                        previousJobFields.style.display = 'block';
+                    } else {
+                        previousJobFields.style.display = 'none';
+                    }
+                }
+            </script>
+            <!-- Duration in First Job -->
+            <h5 class="text-bold">How long did you stay in your first job?</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <div>
+                        <label><input type="radio" name="first_job_duration" value="Less than a month"> Less than a
+                            month</label><br>
+                        <label><input type="radio" name="first_job_duration" value="1 to 6 months"> 1 to 6
+                            months</label><br>
+                        <label><input type="radio" name="first_job_duration" value="7 to 11 months"> 7 to 11
+                            months</label><br>
+                        <label><input type="radio" name="first_job_duration" value="1 year to less than 2 years"> 1
+                            year to less than 2 years</label><br>
+                        <label><input type="radio" name="first_job_duration" value="2 years to less than 3 years"> 2
+                            years to less than 3 years</label><br>
+                        <label><input type="radio" name="first_job_duration" value="3 years to less than 4 years"> 3
+                            years to less than 4 years</label><br>
+                        <label><input type="radio" name="first_job_duration" value=""> Other, please
+                            specify</label>
+                        <input type="text" class="form-control" name="first_job_duration_other"
+                            placeholder="Specify if Other">
+                    </div>
+                </div>
+            </div>
+
+            <!-- How did you find your first job -->
+            <h5 class="text-bold">How did you find your first job?</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <div class="form-check">
+                        <label><input type="checkbox" name="job_finding_method[]"
+                                value="Response to an advertisement"> Response to an advertisement</label><br>
+                        <label><input type="checkbox" name="job_finding_method[]" value="As walk-in applicant"> As
+                            walk-in applicant</label><br>
+                        <label><input type="checkbox" name="job_finding_method[]" value="Recommended by someone">
+                            Recommended by someone</label><br>
+                        <label><input type="checkbox" name="job_finding_method[]" value="Information from friends">
+                            Information from friends</label><br>
+                        <label><input type="checkbox" name="job_finding_method[]"
+                                value="Arranged by school’s job placement officer"> Arranged by school’s job
+                            placement officer</label><br>
+                        <label><input type="checkbox" name="job_finding_method[]" value="Family business"> Family
+                            business</label><br>
+                        <label><input type="checkbox" name="job_finding_method[]" value="Job Fair or PESO"> Job Fair
+                            or Public Employment Service Office (PESO)</label><br>
+                        <label>Others, please specify</label>
+                        <input type="text" class="form-control" name="job_finding_method_other"
+                            placeholder="Specify if Other">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time to land first job -->
+            <h5 class="text-bold">How long did it take you to land your first job?</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <div>
+                        <label><input type="radio" name="time_to_first_job" value="Less than a month"> Less than a
+                            month</label><br>
+                        <label><input type="radio" name="time_to_first_job" value="1 to 6 months"> 1 to 6
+                            months</label><br>
+                        <label><input type="radio" name="time_to_first_job" value="7 to 11 months"> 7 to 11
+                            months</label><br>
+                        <label><input type="radio" name="time_to_first_job" value="1 year to less than 2 years"> 1
+                            year to less than 2 years</label><br>
+                        <label><input type="radio" name="time_to_first_job" value="2 years to less than 3 years"> 2
+                            years to less than 3 years</label><br>
+                        <label><input type="radio" name="time_to_first_job" value=""> Other, please
+                            specify</label>
+                        <input type="text" class="form-control" name="time_to_first_job_other"
+                            placeholder="Specify if Other">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Curriculum Relevance -->
+            <h5 class="text-bold">Was the curriculum you had in college relevant to your first job?</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <label><input type="radio" name="curriculum_relevance" value="Yes"> Yes</label>
+                    <label><input type="radio" name="curriculum_relevance" value="No"> No</label>
+                </div>
+            </div>
+
+            <!-- Competencies Learned in College -->
+            <h5 class="text-bold">What competencies learned in college did you find very useful in your first job?
+            </h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <div class="form-check">
+                        <label><input type="checkbox" name="useful_competencies[]" value="Communication skills">
+                            Communication skills</label><br>
+                        <label><input type="checkbox" name="useful_competencies[]" value="Human Relations skills">
+                            Human Relations skills</label><br>
+                        <label><input type="checkbox" name="useful_competencies[]" value="Entrepreneurial skills">
+                            Entrepreneurial skills</label><br>
+                        <label><input type="checkbox" name="useful_competencies[]"
+                                value="Information Technology skills"> Information Technology skills</label><br>
+                        <label><input type="checkbox" name="useful_competencies[]" value="Problem-solving skills">
+                            Problem-solving skills</label><br>
+                        <label><input type="checkbox" name="useful_competencies[]" value="Critical Thinking skills">
+                            Critical Thinking skills</label><br>
+                        <label>Other skills, please specify</label>
+                        <input type="text" class="form-control" name="useful_competencies_other"
+                            placeholder="Specify if Other">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Difficulties in Getting First Job -->
+            <h5 class="text-bold">What difficulties/problems did you encounter in getting your first job?</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <div class="form-check">
+                        <label><input type="checkbox" name="job_difficulties[]"
+                                value="Inability to communicate in the English language"> Inability to communicate
+                            in the English language</label><br>
+                        <label><input type="checkbox" name="job_difficulties[]"
+                                value="Lack of preparation for the interview and competitive exams"> Lack of
+                            preparation for the interview and competitive exams</label><br>
+                        <label><input type="checkbox" name="job_difficulties[]"
+                                value="Keen competition among the applicants"> Keen competition among the
+                            applicants</label><br>
+                        <label><input type="checkbox" name="job_difficulties[]"
+                                value="Failure to find influential persons with proper connections"> Failure to find
+                            influential persons with proper connections</label><br>
+                        <label><input type="checkbox" name="job_difficulties[]"
+                                value="Employer’s preference for single applicants"> Employer’s preference for
+                            single applicants</label><br>
+                        <label><input type="checkbox" name="job_difficulties[]" value="Lack of experience"> Lack of
+                            experience</label><br>
+                        <label>Other (please specify)</label>
+                        <input type="text" class="form-control" name="job_difficulties_other"
+                            placeholder="Specify if Other">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time to Find Job After Graduation -->
+            <h5 class="text-bold">How long did it take you to find a job after graduation?</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <div>
+                        <label><input type="radio" name="time_to_find_job" value="Less than 2 months"> Less than 2
+                            months</label><br>
+                        <label><input type="radio" name="time_to_find_job" value="After 2-4 months"> After 2-4
+                            months</label><br>
+                        <label><input type="radio" name="time_to_find_job" value="After 5-10 months"> After 5-10
+                            months</label><br>
+                        <label><input type="radio" name="time_to_find_job" value="One year after graduation"> One
+                            year after graduation</label><br>
+                        <label><input type="radio" name="time_to_find_job"
+                                value="More than one year but not beyond two years"> More than one year but not
+                            beyond two years</label><br>
+                        <label><input type="radio" name="time_to_find_job" value=""> Other, please
+                            specify</label>
+                        <input type="text" class="form-control" name="time_to_find_job_other"
+                            placeholder="Specify if Other">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reasons for Waiting Time -->
+            <h5 class="text-bold">What are the reasons for the waiting time?</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <div class="form-check">
+                        <label><input type="checkbox" name="waiting_time_reasons[]"
+                                value="Processing of credentials"> Processing of credentials</label><br>
+                        <label><input type="checkbox" name="waiting_time_reasons[]" value="Processing of license">
+                            Processing of license</label><br>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assessment of Relevance of Paulinian Education -->
+            <h5 class="text-bold">How do you assess the relevance of your Paulinian education in the present times?
+            </h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <label><input type="radio" name="paulinian_relevance" value="Very relevant"> Very
+                        relevant</label><br>
+                    <label><input type="radio" name="paulinian_relevance" value="Somewhat relevant"> Somewhat
+                        relevant</label><br>
+                    <label><input type="radio" name="paulinian_relevance" value="Relevant"> Relevant</label><br>
+                    <label><input type="radio" name="paulinian_relevance" value="Not relevant"> Not relevant</label>
+                </div>
+            </div>
+
+            <!-- Recommendation of SPUP -->
+            <h5 class="text-bold">Would you recommend St. Paul University Philippines to potential students?</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <label><input type="radio" name="recommend_spup" value="Definitely"> Definitely</label><br>
+                    <label><input type="radio" name="recommend_spup" value="Probably"> Probably</label><br>
+                    <label><input type="radio" name="recommend_spup" value="Not sure"> Not sure</label><br>
+                    <label><input type="radio" name="recommend_spup" value="Definitely not"> Definitely
+                        not</label><br>
+                    <textarea class="form-control" name="recommend_spup_reason"
+                        placeholder="Why or why not?"></textarea>
+                </div>
+            </div>
+
+            <!-- Contribution of Paulinian Education to Well-being -->
+            <h5 class="text-bold">To what extent has your Paulinian education contributed to the development of your
+                well-being?</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Items</th>
+                            <th>Great Extent</th>
+                            <th>Average Extent</th>
+                            <th>Least Extent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(['Advance my career', 'Enhanced technical and managerial knowledge', 'Provided professional competence and values', 'Contributed to professional prestige', 'Broadened my understanding of life', 'Molded me as a person', 'Enhanced relationship and understanding of God', 'Imbibed love and service for God and fellowmen'] as $index => $item)
+                            <tr>
+                                <td>{{ $item }}</td>
+                                <td><input type="radio" name="well_being[{{ $index }}]" value="Great Extent"></td>
+                                <td><input type="radio" name="well_being[{{ $index }}]" value="Average Extent"></td>
+                                <td><input type="radio" name="well_being[{{ $index }}]" value="Least Extent"></td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td>Other (Please describe)</td>
+                            <td colspan="3"><input type="text" class="form-control" name="well_being_other"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Involvement in SPUP Affairs -->
+            <h5 class="text-bold">How do you think you can get yourself involved in SPUP affairs?</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Items</th>
+                            <th>High Priority</th>
+                            <th>Average Priority</th>
+                            <th>Low Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(['Providing financial support to SPUP’s programs and projects', 'Extending technical expertise as a resource person for training', 'Promoting SPUP in my community', 'Participating in the activities of the SPUP Alumni Association and my Alumni chapter', 'Encouraging friends and acquaintances to send their children to SPUP for schooling'] as $index => $item)
+                            <tr>
+                                <td>{{ $item }}</td>
+                                <td><input type="radio" name="spup_involvement[{{ $index }}]" value="High Priority">
+                                </td>
+                                <td><input type="radio" name="spup_involvement[{{ $index }}]" value="Average Priority">
+                                </td>
+                                <td><input type="radio" name="spup_involvement[{{ $index }}]" value="Low Priority"></td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td>Other (Please describe)</td>
+                            <td colspan="3">
+                                <input type="text" class="form-control" name="spup_involvement_other"
+                                    placeholder="Specify if Other">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Steps to Encourage Networking with Alumni -->
+            <h5 class="text-bold">What must SPUP do to encourage and sustain its active networking with its alumni?
+            </h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Items</th>
+                            <th>Most Important Step</th>
+                            <th>Important Step</th>
+                            <th>Least Important Step</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(['Cultivate harmonious relations between SPUP and all its students', 'Create opportunities for interactions among alumni, students, faculty, and administration through the SPUP Alumni Association (SPUPAA)', 'Introduce a program for professional upgrading of alumni', 'Invite outstanding alumni as visiting lecturers or speakers', 'Ensure regular communication between SPUP management and the alumni through the SPUP Website', 'Recognize the accomplishments and contributions of alumni in various disciplines through an Alumni Newsletter', 'Design a variety of activities to encourage maximum participation from alumni', 'Provide incentives and benefits for alumni using SPUP services (e.g., discounts on tuition, canteen, and other services)', 'Frequently update the Alumni directory (yearly or every 2 years)'] as $index => $item)
+                            <tr>
+                                <td>{{ $item }}</td>
+                                <td><input type="radio" name="networking_steps[{{ $index }}]"
+                                        value="Most Important Step"></td>
+                                <td><input type="radio" name="networking_steps[{{ $index }}]" value="Important Step">
+                                </td>
+                                <td><input type="radio" name="networking_steps[{{ $index }}]"
+                                        value="Least Important Step"></td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td>Other (Please describe)</td>
+                            <td colspan="3">
+                                <input type="text" class="form-control" name="networking_steps_other"
+                                    placeholder="Specify if Other">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Assisting in SPUP's Marketing Program -->
+            <h5 class="text-bold">How can you assist in SPUP’s extensive marketing program?</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Items</th>
+                            <th>Most Interested</th>
+                            <th>Interested</th>
+                            <th>Least Interested</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(['Encouraging potential students to explore admission into SPUP and introducing them to SPUP’s programs and services', 'Actively supporting the activities of the SPUPAA and my Alumni Chapter', 'Participating in the university’s promotional activities', 'Sending my siblings/children to SPUP', 'Defending and standing for SPUP when circumstances demand it', 'Being a role model in my professional and personal life', 'Being proud of and faithful to being a Paulinian', 'Taking the role of a leader in the community', 'Consistently practicing the Paulinian ideals and virtues'] as $index => $item)
+                            <tr>
+                                <td>{{ $item }}</td>
+                                <td><input type="radio" name="marketing_assist[{{ $index }}]" value="Most Interested">
+                                </td>
+                                <td><input type="radio" name="marketing_assist[{{ $index }}]" value="Interested"></td>
+                                <td><input type="radio" name="marketing_assist[{{ $index }}]" value="Least Interested">
+                                </td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td>Other (Please describe)</td>
+                            <td colspan="3">
+                                <input type="text" class="form-control" name="marketing_assist_other"
+                                    placeholder="Specify if Other">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Suggestions for Improving SPUP Education and Services -->
+            <h5 class="text-bold">What are your suggestions to improve the quality of education and services at St.
+                Paul University Philippines?</h5>
+            <div class="row container-fluid">
+                <div class="col-md-12 form-group">
+                    <textarea class="form-control" name="education_service_suggestions" rows="5"
+                        placeholder="Write your suggestions here..."></textarea>
+                </div>
+            </div>
         </div>
-        <div class="row container-fluid float-right mt-3">
+        <div class="row container-fluid float-right my-3">
             <button class="btn btn-success float-right">Submit</button>
         </div>
-    </div>
 </form>
-
+<br></br>
 
 @include('public.Home.footer')
 
@@ -324,11 +836,43 @@
             otherInput.style.display = 'block';
             selectBox.removeAttribute('name');
             otherText.setAttribute('name', 'specialization');
-
         } else {
             otherInput.style.display = 'none';
             selectBox.setAttribute('name', 'specialization');
             otherText.removeAttribute('name');
         }
     }
+
+    function toggleEmploymentDetails(value) {
+        var employmentDetails = document.getElementById('employmentDetails');
+        var occupationDetails = document.getElementById('occupationDetails');
+        if (value === 'Yes') {
+            employmentDetails.style.display = 'block';
+            employmentDetails.classList.add('d-flex','align-items-center','justify-content-center');
+            occupationDetails.style.display = 'none';
+            occupationDetails.classList.remove('d-flex','align-items-center','justify-content-center');
+        } else {
+            occupationDetails.style.display = 'block';
+            occupationDetails.classList.add('d-flex','align-items-center','justify-content-center');
+            employmentDetails.style.display = 'none';
+            employmentDetails.classList.remove('d-flex','align-items-center','justify-content-center');
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let successAlert = document.getElementById('success-alert');
+        let errorAlerts = document.querySelectorAll('.alert-danger');
+
+        if (successAlert) {
+            setTimeout(() => {
+                successAlert.style.display = 'none';
+            }, 5000); // 5000ms = 5 seconds
+        }
+
+        errorAlerts.forEach((errorAlert) => {
+            setTimeout(() => {
+                errorAlert.style.display = 'none';
+            }, 3000); // 3000ms = 3 seconds
+        });
+    });
 </script>

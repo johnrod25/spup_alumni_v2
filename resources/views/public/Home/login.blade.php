@@ -6,8 +6,8 @@
             <div class="container p-5 login-form">
                 <form class="yourform" action="{{ route('login') }}" method="post">
                     @csrf
-                    <h1>Welcome Back!</h1>
-                    <p class="mt-3">To keep connected with us, please login using your personal information.</p>
+                    <h1>Admin Login</h1>
+                    <p class="mt-3">To access the admin panel, please login  using your administrator credentials.</p>
                     <div class="form-group mt-5">
                         <label for="username">Email Address</label>
                         <input type="email" name="username" id="username" class="form-control mb-3" value="{{ old('username') }}">
@@ -18,7 +18,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center border-1 border-top pt-3">
                         <button class="btn btn-yellow text-uppercase px-5">Sign In</button>
-                        <a href="#" class="">Forgot Password</a>
+                        {{-- <a href="#" class="">Forgot Password</a> --}}
                     </div>
                 </form>
                 @error('error-message')

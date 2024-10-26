@@ -6,7 +6,15 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h3>Manage Alumni</h3>
-                    <a href="{{ route('generate.pdf') }}" class="btn btn-primary">Generate PDF</a>
+                    <div>
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort By Degree
+                        </button>
+                        <div class="dropdown-menu" id="degree-sort-options">
+                            <!-- Degrees will be dynamically loaded here -->
+                        </div>
+                        <a href="{{ route('generate.pdf') }}" class="btn btn-primary">Generate PDF</a>
+                    </div>
                 </div>
                 <hr class="hr">
                 <table id="example" class="table table-bordered table-striped table-hover">
@@ -14,13 +22,15 @@
                         <tr>
                             <th>No.</th>
                             <th>Full Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Home Address</th>
+                            <th>Mobile Number</th>
+                            <th>Age</th>
                             <th>Degree</th>
-                            <th>Batch</th>
                             <th>Year Graduated</th>
-                            <th>Date Created</th>
+                            <th>Employed</th>
+                            <th>Place of Work</th>
+                            <th>Organization Type</th>
+                            {{-- <th>Occupation</th> --}}
+                            <th>Employment Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -29,26 +39,21 @@
                         @foreach ($datas as $data)
                             <tr class="text-capitalize">
                                 <td>{{ $i++ }}</td>
-
                                 <td>{{ $data->name }}</td>
-                                <td>{{ $data->username }}</td>
-                                <td>{{ $data->user->phone_number }}</td>
-                                <td>{{ $data->user->home_address }}</td>
-                                <td>{{ $data->user->degree }}</td>
-                                <td>{{ $data->user->batch }}</td>
-                                <td>{{ $data->user->year_graduated }}</td>
-                                <td>{{ $data->created_at }}</td>
+                                <td>{{ $data->userDetails->mobile_number ?? 'N/A' }}</td>
+                                <td>{{ $data->userDetails->age ?? 'N/A' }}</td>
+                                <td>{{ $data->userDetails->degree ?? 'N/A' }}</td>
+                                <td>{{ $data->userDetails->year_graduated ?? 'N/A' }}</td>
+                                <td>{{ $data->userDetails->employed ?? 'N/A' }}</td>
+                                <td>{{ $data->userDetails->place_of_work ?? 'N/A' }}</td>
+                                <td>{{ $data->userDetails->organization_type ?? 'N/A' }}</td>
+                                {{-- <td>{{ $data->userDetails->occupation ?? 'N/A' }}</td> --}}
+                                <td>{{ $data->userDetails->employment_status ?? 'N/A' }}</td>
                                 <td class="text-center">
-                                    <a data-toggle="tooltip" title="Edit" class="btn btn-primary btn-sm"
-                                        id="edit-alumni" value="{{ $data->user_id }}"><i class="fa fa-edit"
-                                            aria-hidden="true"></i></a>
-                                    <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm"
-                                        id="delete-alumni" value="{{ $data->id }}"><i class="fa fa-trash"
-                                            aria-hidden="true"></i></a>
-                                    <form action="{{ route('delete-alumni', $data->id) }}" method="post"
-                                        class="form-hidden" id="delete-form">
-                                        {{-- <button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button> --}}
+                                    <a data-toggle="tooltip" title="Edit" class="btn btn-primary btn-sm edit-alumni" value="{{ $data->id }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <form action="{{ route('delete-alumni', $data->id) }}" method="post" class="d-inline delete-form">
                                         @csrf
+                                        <button type="submit" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm delete-alumni" value="{{ $data->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -68,7 +73,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Alumni Information</h4>
+                <h4 class="modal-title">SPUP Alumni Information</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -79,201 +84,115 @@
                     <div class="row container-fluid d-flex align-items-center justify-content-center">
                         <h5 class="text-bold col-md-12">PERSONAL INFORMATION</h5>
                         <div class="col-md-4 form-group">
-                            <label>Last Name</label>
+                            <label>Name</label>
                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                             <input type="hidden" name="user_id" id="edit_id">
-                            <input type="text" class="form-control" name="lastname" id="edit_lastname"
-                                placeholder="Enter Last Name" required>
+                            <input type="text" class="form-control" name="name" id="edit_name" placeholder="Enter Full Name" required>
                         </div>
                         <div class="col-md-4 form-group">
-                            <label>First Name</label>
-                            <input type="text" class="form-control" name="firstname" id="edit_firstname"
-                                placeholder="Enter First Name" required>
+                            <label>Current Position</label>
+                            <input type="text" class="form-control" name="current_position" id="edit_current_position" placeholder="Enter Current Position" required>
                         </div>
                         <div class="col-md-4 form-group">
-                            <label>Middle Name</label>
-                            <input type="text" class="form-control" name="middlename" id="edit_middlename"
-                                placeholder="Enter Middle Name" required>
+                            <label>Telephone Number</label>
+                            <input type="text" class="form-control" name="telephone_number" id="edit_telephone_number" placeholder="Enter Telephone Number">
                         </div>
                         <div class="col-md-4 form-group">
-                            <label>Student Number(Optional)</label>
-                            <input type="text" class="form-control" name="student_number" id="edit_student_number"
-                                placeholder="Enter Student Number" required>
+                            <label>Mobile Number</label>
+                            <input type="text" class="form-control" name="mobile_number" id="edit_mobile_number" placeholder="Enter Mobile Number" required>
                         </div>
                         <div class="col-md-4 form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" id="edit_email"
-                                placeholder="Enter Email Address" required>
+                            <input type="email" class="form-control" name="email" id="edit_email" placeholder="Enter Email Address" required>
                         </div>
                         <div class="col-md-4 form-group">
-                            <label>Phone Number</label>
-                            <input type="text" class="form-control" name="phone_number" id="edit_phone_number"
-                                placeholder="Enter Phone Number" required>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <label>Home Address</label>
-                            <input type="text" class="form-control" name="home_address" id="edit_home_address"
-                                placeholder="Enter Home Address" required>
+                            <label>Sex</label>
+                            <input type="text" class="form-control" name="gender" id="edit_gender" placeholder="Enter Gender/Sex" required>
                         </div>
                         <div class="col-md-4 form-group">
-                            <label>Birth Date</label>
-                            <input type="date" class="form-control" name="birthdate" id="edit_birthdate"
-                                placeholder="Enter Birth Date" required>
+                            <label>Age</label>
+                            <input type="text" class="form-control" name="age" id="edit_age" placeholder="Enter Age" required>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Civil Status</label>
+                            <input type="text" class="form-control" name="civil_status" id="edit_civil_status" placeholder="Enter Civil Status" required>
                         </div>
                     </div>
+
                     <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">
-                        <h5 class="text-bold col-12">ACADEMIC PROGRAM/ DEGREE IN ST.PAUL UNIVERSITY PHILIPPINES</h5>
+                        <h5 class="text-bold col-12">EDUCATIONAL BACKGROUND</h5>
                         <div class="col-md-6 form-group">
                             <label>Program(s)/Degree(s) Completed in St. Paul University</label>
-                            <select name="degree" id="edit_degree" placeholder="Enter Program/ Degree"
-                                class="form-select form-control" required>
-                                <option value=""></option>
-                                <option value="Bachelor of Arts in English Language Studies">Bachelor of Arts in
-                                    English Language Studies</option>
-                                <option value="Bachelor of Science in Psychology">Bachelor of Science in Psychology
-                                </option>
-                                <option value="Bachelor of Science in Biology">Bachelor of Science in Biology</option>
-                                <option value="Bachelor of Science in Social Work">Bachelor of Science in Social Work
-                                </option>
-                                <option value="Bachelor of Science in Public Administration">Bachelor of Science in
-                                    Public Administration</option>
-                                <option value="Bachelor of Science in Biology Major in MicroBiology">Bachelor of
-                                    Science in Biology Major in MicroBiology</option>
-                                <option value="Bachelor of Secondary Education">Bachelor of Secondary Education
-                                </option>
-                                <option value="Bachelor of Elementary Education">Bachelor of Elementary Education
-                                </option>
-                                <option value="Bachelor of Physical Education">Bachelor of Physical Education</option>
-                                <option value="Bachelor of Science in Accountancy">Bachelor of Science in Accountancy
-                                </option>
-                                <option value="Bachelor of Science in Entrepreneurship">Bachelor of Science in
-                                    Entrepreneurship</option>
-                                <option
-                                    value="Bachelor of Science in Business Administration major in: Marketing Management, Financial Management and Operations Management">
-                                    Bachelor of Science in Business Administration major in: Marketing Management,
-                                    Financial Management and Operations Management</option>
-                                <option value="Bachelor of Science in Management Accounting">Bachelor of Science in
-                                    Management Accounting</option>
-                                <option value="Bachelor of Science in Hospitality Management">Bachelor of Science in
-                                    Hospitality Management</option>
-                                <option value="Bachelor of Science in Tourism Management">Bachelor of Science in
-                                    Tourism Management</option>
-                                <option value="Bachelor of Science in Product Design and Marketing Innovation">Bachelor
-                                    of Science in Product Design and Marketing Innovation</option>
-                                <option value="Bachelor of Science in Information Technology">Bachelor of Science in
-                                    Information Technology</option>
-                                <option value="Bachelor of Library and Information Science">Bachelor of Library and
-                                    Information Science</option>
-                                <option value="Bachelor of Science in Civil Engineering">Bachelor of Science in Civil
-                                    Engineering</option>
-                                <option value="Bachelor of Science in Environmental and Sanitary Engineering">Bachelor
-                                    of Science in Environmental and Sanitary Engineering</option>
-                                <option value="Bachelor of Science in Computer Engineering">Bachelor of Science in
-                                    Computer Engineering</option>
-                                <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing</option>
-                                <option value="Bachelor of Science in Pharmacy">Bachelor of Science in Pharmacy
-                                </option>
-                                <option value="Bachelor of Science in Medical Technology">Bachelor of Science in
-                                    Medical Technology</option>
-                                <option value="Bachelor of Science in Physical Therapy">Bachelor of Science in Physical
-                                    Therapy</option>
-                                <option value="Bachelor of Science in Radiologic Technology">Bachelor of Science in
-                                    Radiologic Technology</option>
-                                <option value="Bachelor of Science in Midwifery">Bachelor of Science in Midwifery
-                                </option>
-                                <option value="Doctor of Medicine">Doctor of Medicine</option>
-                            </select>
-                            {{-- <input type="text" class="form-control" name="degree" placeholder="Enter Program/ Degree" required> --}}
+                            <input type="text" class="form-control" name="degree" id="edit_degree" placeholder="Enter Program/ Degree" required>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>What Batch(es) do you belong?</label>
-                            {{-- <select name="batch" id="edit_batch" placeholder="Select batch" class="form-select form-control" required>
-                                <option value=""></option>
-                                <option value="HS BATCH78">HS BATCH78</option>
-                                <option value="BSN BATCH90">BSN BATCH90</option>
-                                <option value="MBA BATCH2009">MBA BATCH2009</option>
-                            </select> --}}
-                            <input type="text" id="edit_batch" class="form-control" name="batch"
-                                placeholder="EG. HS BATCH78; BSN BATCH90; MBA BATCH2009,ETC." required>
+                            <label>College or University</label>
+                            <input type="text" class="form-control" name="college" id="edit_college" placeholder="Enter College or University">
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label>Please indicate how you would want to br involved in your Alma Mater</label>
-                            <select name="involve_purpose" id="edit_involve_purpose"
-                                placeholder="Please indicate how you would want to br involved in your Alma Mater"
-                                class="form-select form-control" required>
-                                <option value=""></option>
-                                <option value="Consultant">Consultant</option>
-                                <option value="Resource Speaker">Resource Speaker</option>
-                                <option value="Standing Committee Member">Standing Committee Member</option>
-                                <option value="Advisory Committee Member">Advisory Committee Member</option>
-                                <option value="Part-time Faculty">Part-time Faculty</option>
-                                <option value="Panel member in Theses/Dissertation Validation">Panel member in
-                                    Theses/Dissertation
-                                    Validation</option>
-                                <option value="Marketing Campaign">Marketing Campaign</option>
-                                <option value="Mentoring Current Students">Mentoring Current Students</option>
-                                <option value="Supporting recent graduates as they start their career.">Supporting
-                                    recent graduates as
-                                    they start their career.</option>
-                            </select>
+                        <div class="col-md-4 form-group">
+                            <label>Year Graduated</label>
+                            <input type="text" class="form-control" name="year_graduated" id="edit_year_graduated" placeholder="Enter Year Graduated" required>
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label>Year Graduated/ Last Year Attended</label>
-                            <input type="date" id="edit_year_graduated" class="form-control"
-                                name="year_graduated" placeholder="Enter Year Graduated/ Last Year Attended" required>
+                        <div class="col-md-4 form-group">
+                            <label>Honor(s) or Award(s) Received</label>
+                            <input type="text" class="form-control" name="awards" id="edit_awards" placeholder="Enter Honor(s) or Award(s) Received">
                         </div>
-                        <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">
-                            <h5 class="text-bold col-12">ABOUT YOUR WORK</h5>
-                            <div class="col-md-4 form-group">
-                                <label>Company Name/ Employer</label>
-                                <input type="text" class="form-control" name="company_name"
-                                    id="edit_company_name" placeholder="Enter Company Name/ Employer" required>
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>Specialization/ Expertise/ Industry</label>
-                                <input type="text" class="form-control" name="specialization"
-                                    id="edit_specialization" placeholder="Enter Speacialization.." required>
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>Designation/ Occupation</label>
-                                <input type="text" class="form-control" name="occupation" id="edit_occupation"
-                                    placeholder="Enter ..." required>
+                        <div class="col-md-4 form-group">
+                            <label>Professional Examination(s) Passed</label>
+                            <input type="text" class="form-control" name="exams" id="edit_exams" placeholder="Enter Professional Examination(s) Passed">
+                        </div>
+                    </div>
+
+                    <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">
+                        <h5 class="text-bold col-12">TRAINING(S) AND ADVANCED STUDIES</h5>
+                        <div class="col-md-12 form-group">
+                            <label>Title of Training or Advanced Study</label>
+                            <textarea class="form-control" name="training" id="edit_training" placeholder="Enter Title of Training or Advanced Study"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row container-fluid d-flex align-items-center justify-content-center mt-3">
+                        <h5 class="text-bold col-12">EMPLOYMENT DATA</h5>
+                        <div class="col-md-4 form-group">
+                            <label>Are you presently employed?</label>
+                            <input type="text" class="form-control" name="employed" id="edit_employed" placeholder="Enter Employment Status" required>
+                        </div>
+                        <div id="employmentDetails" class="w-100" style="display: none;">
+                            <div class="col-md-6 form-group">
+                                <label>Name of Organization</label>
+                                <input type="text" class="form-control" name="organization" id="edit_organization" placeholder="Enter Name of Organization">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Work Engagement Status</label>
-                                <select name="work_status" id="edit_work_status" class="form-select form-control"
-                                    required>
-                                    <option value=""></option>
-                                    <option value="Employer">Employer/ Company or Business Owner</option>
-                                    <option value="Full time">Full Time Employee</option>
-                                    <option value="Part time">Part Time Employee</option>
-                                    <option value="self-employed">Self Employed</option>
-                                    <option value="freelance">Freelance Consultant/ Service Provider</option>
-                                    <option value="retiree">Retiree</option>
-                                    {{-- <option value="others">Others</option> --}}
-                                </select>
+                                <label>Address</label>
+                                <input type="text" class="form-control" name="address" id="edit_address" placeholder="Enter Address">
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label>How long did it take before you were employed after graduation?</label>
-                                <select name="before_employed" id="edit_before_employed"
-                                    class="form-select form-control" required>
-                                    <option value=""></option>
-                                    <option value="1-3">One to three (1-3) months</option>
-                                    <option value="4-6">Four to six (4-6) months</option>
-                                    <option value="7-11">Seven to eleven (7-11) months</option>
-                                    <option value="1 year">One year</option>
-                                    <option value="1-2 years">One to two years</option>
-                                    <option value="2 years or more">Two years or more</option>
-                                    <option value="na">N/A</option>
-                                </select>
+                            <div class="col-md-4 form-group">
+                                <label>Place of Work</label>
+                                <input type="text" class="form-control" name="place_of_work" id="edit_place_of_work" placeholder="Enter Place of Work">
+                            </div>
+                            <div class="col-md4 form-group">
+                                <label>Type of Organization</label>
+                                <input type="text" class="form-control" name="organization_type" id="edit_organization_type" placeholder="Enter Type of Organization">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Present Occupation</label>
+                                <input type="text" class="form-control" name="occupation" id="edit_occupation" placeholder="Enter Occupation">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Present Employment Status</label>
+                                <input type="text" class="form-control" name="employment_status" id="edit_employment_status" placeholder="Enter Employment Status">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Monthly Gross Income</label>
+                                <input type="text" class="form-control" name="monthly_income" id="edit_monthly_income" placeholder="Enter Monthly Gross Income">
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-footer">
+                <a href="#" id="generate-pdf" class="btn btn-primary">Generate PDF</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="update-alumni">Update Record</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -284,47 +203,7 @@
 @include('public.Admin.footer')
 
 <script>
-    $(document).on("click", "#add-new", function(e) {
-        e.preventDefault();
-        let image = document.getElementById('image');
-        let title = $("#title").val();
-        let content = $("#content").val();
-        if (image.files.length == 0) {
-            errorToast("Image field is required");
-        } else {
-            let formData = new FormData();
-            formData.append('_token', $('#token').val());
-            formData.append('image', image.files[0]);
-            formData.append('title', title);
-            formData.append('content', content);
-            $.ajax({
-                url: '{{ route('add-news') }}',
-                type: "post",
-                dataType: "json",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    // let data = JSON.stringify(response);
-                    if (data.response == "success") {
-                        $('#modal-news').modal('hide')
-                        $("#form-sched")[0].reset();
-                        // successToast(data.message);
-                        localStorage.setItem("Notif", JSON.stringify(data));
-                        window.location.reload();
-                    } else {
-                        errorToast(data.message);
-                    }
-                },
-                error: function(response) {
-                    // console.log(response)
-                    errorToast(response.responseJSON.message);
-                }
-            });
-        }
-    });
-
-    $(document).on("click", "#edit-alumni", function(e) {
+    $(document).on("click", ".edit-alumni", function(e) {
         e.preventDefault();
         var id = $(this).attr("value");
         $.ajax({
@@ -338,31 +217,85 @@
             success: function(data) {
                 if (data.response === 'success') {
                     $('#modal-edit').modal('show');
-                    $("#edit_id").val(data.user[0].user_id);
-                    $("#edit_lastname").val(data.user[0].user.lastname);
-                    $("#edit_firstname").val(data.user[0].user.firstname);
-                    $("#edit_middlename").val(data.user[0].user.middlename);
-                    $("#edit_student_number").val(data.user[0].user.student_number);
-                    $("#edit_email").val(data.user[0].user.email);
-                    $("#edit_phone_number").val(data.user[0].user.phone_number);
-                    $("#edit_home_address").val(data.user[0].user.home_address);
-                    $("#edit_birthdate").val(data.user[0].user.birthdate);
-                    $("#edit_degree").val(data.user[0].user.degree);
-                    $("#edit_batch").val(data.user[0].user.batch);
-                    $("#edit_involve_purpose").val(data.user[0].user.involve_purpose);
-                    $("#edit_year_graduated").val(data.user[0].user.year_graduated);
-                    $("#edit_company_name").val(data.user[0].user.company_name);
-                    $("#edit_specialization").val(data.user[0].user.specialization);
-                    $("#edit_occupation").val(data.user[0].user.occupation);
-                    $("#edit_work_status").val(data.user[0].user.work_status);
-                    $("#edit_before_employed").val(data.user[0].user.before_employed);
+                    let userDetails = data.user;
+
+                    $("#edit_id").val(userDetails.user_id);
+                    $("#edit_name").val(userDetails.name);
+                    $("#edit_current_position").val(userDetails.current_position);
+                    $("#edit_telephone_number").val(userDetails.telephone_number);
+                    $("#edit_mobile_number").val(userDetails.mobile_number);
+                    $("#edit_email").val(userDetails.email);
+                    $("#edit_gender").val(userDetails.gender);
+                    $("#edit_age").val(userDetails.age);
+                    $("#edit_civil_status").val(userDetails.civil_status);
+                    $("#edit_degree").val(userDetails.degree);
+                    $("#edit_college").val(userDetails.college);
+                    $("#edit_year_graduated").val(userDetails.year_graduated);
+                    $("#edit_awards").val(userDetails.awards);
+                    $("#edit_exams").val(userDetails.exams);
+                    $("#edit_training").val(userDetails.training);
+                    $("#edit_employed").val(userDetails.employed);
+                    $("#edit_organization").val(userDetails.organization);
+                    $("#edit_address").val(userDetails.address);
+                    $("#edit_place_of_work").val(userDetails.place_of_work);
+                    $("#edit_organization_type").val(userDetails.organization_type);
+                    $("#edit_occupation").val(userDetails.occupation);
+                    $("#edit_employment_status").val(userDetails.employment_status);
+                    $("#edit_monthly_income").val(userDetails.monthly_income);
+
+                    let form_control = document.querySelectorAll('.form-control');
+                    form_control.forEach(element => {
+                        element.readOnly = true;
+                    });
+
+                    toggleEmploymentDetails(userDetails.employed);
                 } else {
                     errorToast(data.message);
                 }
             }
         });
-
     });
+
+
+    $(document).on("click", ".edit-alumni", function(e) {
+        e.preventDefault();
+        var id = $(this).attr("value");
+        $.ajax({
+            url: "{{ route('edit-alumni') }}",
+            type: "post",
+            dataType: "json",
+            data: {
+                "_token": $('#token').val(),
+                id: id
+            },
+            success: function(data) {
+                if (data.response === 'success') {
+                    $('#modal-edit').modal('show');
+                    let userDetails = data.user;
+
+                    $("#edit_id").val(userDetails.user_id);
+                    $("#edit_name").val(userDetails.name);
+
+                    // Set the href for the Generate PDF button
+                    $('#generate-pdf').attr('href', '/alumni/' + userDetails.user_id + '/pdf');
+
+                    // Populate the form with the rest of the alumni data...
+                } else {
+                    errorToast(data.message);
+                }
+            }
+        });
+    });
+
+
+    function toggleEmploymentDetails(value) {
+        var employmentDetails = document.getElementById('employmentDetails');
+        if (value === 'Yes') {
+            employmentDetails.style.display = 'block';
+        } else {
+            employmentDetails.style.display = 'none';
+        }
+    }
 
     $(document).on("click", "#update-alumni", function(e) {
         e.preventDefault();
@@ -370,23 +303,28 @@
         let formData = new FormData();
         formData.append('_token', $('#token').val());
         formData.append('id', edit_id);
-        formData.append('lastname', $("#edit_lastname").val());
-        formData.append('firstname', $("#edit_firstname").val());
-        formData.append('middlename', $("#edit_middlename").val());
-        formData.append('student_number', $("#edit_student_number").val());
+        formData.append('name', $("#edit_name").val());
+        formData.append('current_position', $("#edit_current_position").val());
+        formData.append('telephone_number', $("#edit_telephone_number").val());
+        formData.append('mobile_number', $("#edit_mobile_number").val());
         formData.append('email', $("#edit_email").val());
-        formData.append('phone_number', $("#edit_phone_number").val());
-        formData.append('home_address', $("#edit_home_address").val());
-        formData.append('birthdate', $("#edit_birthdate").val());
+        formData.append('gender', $("#edit_gender").val());
+        formData.append('age', $("#edit_age").val());
+        formData.append('civil_status', $("#edit_civil_status").val());
         formData.append('degree', $("#edit_degree").val());
-        formData.append('batch', $("#edit_batch").val());
-        formData.append('involve_purpose', $("#edit_involve_purpose").val());
+        formData.append('college', $("#edit_college").val());
         formData.append('year_graduated', $("#edit_year_graduated").val());
-        formData.append('company_name', $("#edit_company_name").val());
-        formData.append('specialization', $("#edit_specialization").val());
+        formData.append('awards', $("#edit_awards").val());
+        formData.append('exams', $("#edit_exams").val());
+        formData.append('training', $("#edit_training").val());
+        formData.append('employed', $("#edit_employed").val());
+        formData.append('organization', $("#edit_organization").val());
+        formData.append('address', $("#edit_address").val());
+        formData.append('place_of_work', $("#edit_place_of_work").val());
+        formData.append('organization_type', $("#edit_organization_type").val());
         formData.append('occupation', $("#edit_occupation").val());
-        formData.append('work_status', $("#edit_work_status").val());
-        formData.append('before_employed', $("#edit_before_employed").val());
+        formData.append('employment_status', $("#edit_employment_status").val());
+        formData.append('monthly_income', $("#edit_monthly_income").val());
 
         $.ajax({
             url: "{{ route('update-alumni') }}",
@@ -407,14 +345,123 @@
         });
     });
 
-    $(document).on("click", "#delete-alumni", function(e) {
+    $(document).on("click", ".delete-alumni", function(e) {
         e.preventDefault();
-        var save = window.confirm('Are you sure you want to delete this?')
+        var form = $(this).closest('form');
+        var save = window.confirm('Are you sure you want to delete this?');
         if (save == true) {
-            $('#delete-form').submit();
-            successToast('Deleted successfully.');
+            form.submit();
         } else {
             return false;
         }
     });
+
+    function fetchDegrees() {
+        $.ajax({
+            url: '{{ route('fetch-degrees') }}',
+            type: 'GET',
+            success: function(data) {
+                if (data.response == 'success') {
+                    let degrees = data.degrees;
+                    let degreeDropdown = $('#degree-dropdown');
+                    degreeDropdown.empty();
+                    degrees.forEach(function(degree) {
+                        degreeDropdown.append('<a class="dropdown-item" href="#" onclick="selectDegree(\'' + degree.name + '\')">' + degree.name + '</a>');
+                    });
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function(response) {
+                alert('An error occurred while fetching degrees.');
+            }
+        });
+    }
+
+    function selectDegree(degreeName) {
+        $('#degree-name').val(degreeName);
+    }
+
+    $(document).ready(function() {
+        fetchDegrees();
+        $('#example').DataTable();
+        fetchSortDegrees();
+    });
+
+    function fetchSortDegrees() {
+        $.ajax({
+            url: '{{ route('fetch-degrees') }}',
+            type: 'GET',
+            success: function(data) {
+                if (data.response == 'success') {
+                    let degrees = data.degrees;
+                    let degreeSortOptions = $('#degree-sort-options');
+                    degreeSortOptions.empty();
+                    degrees.forEach(function(degree) {
+                        degreeSortOptions.append('<a class="dropdown-item" href="#" onclick="sortTableByDegree(\'' + degree.name + '\')">' + degree.name + '</a>');
+                    });
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function(response) {
+                alert('An error occurred while fetching degrees.');
+            }
+        });
+    }
+
+    function sortTableByDegree(degree) {
+        let table = $('#example').DataTable();
+        table.column(7).search(degree).draw();
+    }
+
+    function sortTable(column) {
+        let table = $('#example').DataTable();
+        switch (column) {
+            case 'degree':
+                table.order([7, 'asc']).draw();
+                break;
+            case 'batch':
+                table.order([8, 'asc']).draw();
+                break;
+        }
+    }
+
+
+
+    $(document).ready(function() {
+        fetchSortDegrees();
+
+        // Initialize DataTable
+        $('#example').DataTable();
+    });
+
+    function fetchSortDegrees() {
+        $.ajax({
+            url: '{{ route('fetch-degrees') }}',
+            type: 'GET',
+            success: function(data) {
+                if (data.response == 'success') {
+                    let degrees = data.degrees;
+                    let degreeSortOptions = $('#degree-sort-options');
+                    degreeSortOptions.empty(); // Clear existing options
+
+                    degrees.forEach(function(degree) {
+                        degreeSortOptions.append('<a class="dropdown-item" href="#" onclick="sortTableByDegree(\'' + degree.name + '\')">' + degree.name + '</a>');
+                    });
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function(response) {
+                alert('An error occurred while fetching degrees.');
+            }
+        });
+    }
+
+    function sortTableByDegree(degree) {
+        let table = $('#example').DataTable();
+        table.column(4).search(degree).draw();  // Assuming Degree is the 5th column (index 4)
+    }
+
 </script>

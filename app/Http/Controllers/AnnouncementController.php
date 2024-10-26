@@ -32,6 +32,20 @@ class AnnouncementController extends Controller
             'datas' => Announcement::orderBy('id', 'DESC')->get()
         ]);
     }
+    public function show_year_announcement(Request $request)
+    {
+        // dd($request);
+        if ($request->year_announcement != '') {
+            return view('public.Home.announcement', [
+                'datas' => Announcement::whereYear('created_at',$request->year_announcement)->orderBy('id', 'DESC')->get()
+            ]);
+        }
+        else{
+            return view('public.Home.announcement', [
+                'datas' => Announcement::orderBy('id', 'DESC')->get()
+            ]);
+        }
+    }
 
     public function add_announcement(Announcement_Request $request)
     {

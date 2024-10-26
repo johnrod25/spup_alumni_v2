@@ -83,35 +83,35 @@
                             <div class="col-md-6 icon-box" data-aos="fade-up">
                                 <i class="bx bx-images"></i>
                                 <h4>YEARBOOK</h4>
-                                <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip
+                                <p>Capture and cherish your memories with our beautifully crafted yearbooks
                                 </p>
                             </div>
                             <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
                                 <i class="bx bx-cube-alt"></i>
                                 <h4>PACKAGES</h4>
-                                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                <p>Explore our packages tailord to meet your specific needs
                                 </p>
                             </div>
-                            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+                            {{-- <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
                                 <i class="bx bx-receipt"></i>
                                 <h4>RESUME</h4>
                                 <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
                                 <i class="bx bx-shield"></i>
-                                <h4>Events & Homecomings</h4>
-                                <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+                                <h4>Events Booking</h4>
+                                <p>Join us for memorable events</p>
                             </div>
                             <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
                                 <i class="bx bx-globe"></i>
                                 <h4>Our Global Network</h4>
-                                <p>Et fuga et deserunt et enim. Dolorem architecto ratione tensa raptor marte</p>
+                                <p>Connect with our extensive global network of alumni</p>
                             </div>
-                            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
+                            {{-- <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
                                 <i class="bx bx-id-card"></i>
                                 <h4>Alumni Card Partners</h4>
                                 <p>Est autem dicta beatae suscipit. Sint veritatis et sit quasi ab aut inventore</p>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -189,9 +189,7 @@
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Gallery</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos qui modi asperiores sint accusamus
-                    voluptatem quae animi ducimus deleniti velit optio a iusto accusantium quisquam, labore ad aliquid
-                    atque. Tempore.</p>
+                <p>Our gallery showcases the vibrant and diverse experiences of SPUP alumni. Whether it's capturing the joy of reunions, the inspiration of professional milestones, or the camaraderie at networking events, these images reflect the heart of our alumni community. Take a journey through the memories and milestones that define us.</p>
             </div>
         </div>
         <div class="container-fluid" data-aos="fade-up">

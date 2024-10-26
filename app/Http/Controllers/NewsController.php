@@ -33,6 +33,21 @@ class NewsController extends Controller
         ]);
     }
 
+    public function show_year_news(Request $request)
+    {
+        // dd($request);
+        if ($request->year_news != '') {
+            return view('public.Home.news', [
+                'datas' => News::whereYear('created_at',$request->year_news)->orderBy('id', 'DESC')->get()
+            ]);
+        }
+        else{
+            return view('public.Home.news', [
+                'datas' => News::orderBy('id', 'DESC')->get()
+            ]);
+        }
+    }
+
     public function add_news(News_Request $request)
     {
         if ($request->validated() + [

@@ -175,3 +175,45 @@ a img {
     padding: 20px;
    }
 }
+
+
+/* Add degree css */
+.degree-form-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.degree-form-container .form-group {
+    margin-bottom: 20px;
+}
+
+.degree-form-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.degree-form-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.degree-form-container .btn-success {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.degree-form-container .btn-success:hover {
+    background-color: #218838;
+}

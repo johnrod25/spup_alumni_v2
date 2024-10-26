@@ -18,20 +18,20 @@
                       <ul>
                           <li><i class="bx bx-chevron-right"></i> <a href="/#">Home</a></li>
                           <li><i class="bx bx-chevron-right"></i> <a href="/#about">About us</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="/#services">Services</a></li>
+                          {{-- <li><i class="bx bx-chevron-right"></i> <a href="/#services">Services</a></li> --}}
                           <li><i class="bx bx-chevron-right"></i> <a href="/#gallery">Gallery</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                          {{-- <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> --}}
                       </ul>
                   </div>
 
                   <div class="col-lg-3 col-md-6 col-sm-6 footer-links">
                       <h4>Our Services</h4>
                       <ul>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Year Book</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Packages</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Resume</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Events & Homecommings</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Our Global Network</a></li>
+                          {{-- <li><i class="bx bx-chevron-right"></i> <a href="#">Year Book</a></li> --}}
+                          {{-- <li><i class="bx bx-chevron-right"></i> <a href="#">Packages</a></li> --}}
+                          {{-- <li><i class="bx bx-chevron-right"></i> <a href="#">Resume</a></li> --}}
+                          <li><i class="bx bx-chevron-right"></i> <a href="#services">Event Booking</a></li>
+                          {{-- <li><i class="bx bx-chevron-right"></i> <a href="#">Our Global Network</a></li> --}}
                       </ul>
                   </div>
 
