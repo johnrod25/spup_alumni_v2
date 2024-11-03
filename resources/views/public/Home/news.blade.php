@@ -21,10 +21,10 @@
         </div>
         <button type="submit" class="btn btn-primary col-md-2">OK</button>
     </form>
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         
         @foreach ($datas as $data)
-        <div class="card col-md-12 mt-3">
+        <div class="card col-md-5 m-3">
             <img src="{{ asset('images/news/'.$data->image_path) }}" class="card-img-top mt-3 h-100" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{$data->title}}</h5>
